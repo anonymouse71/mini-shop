@@ -1,0 +1,49 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li.active Authentication
+  .row
+    .col-lg-12.col-md-12.col-sm-12
+      %h1.section-title-inner
+        %span
+          %i.fa.fa-lock
+          Authentication
+      .row.userInfo
+        .col-xs-12.col-sm-4
+          %h2.block-title-2 Sign up or Sign in before continue
+          %p You need to sign up before continue.
+          %a{'data-dismiss' => 'modal', 'data-toggle' => 'modal', :href => '#ModalSignup'}
+            %button.btn.btn-primary{:type => 'button'}
+              %i.fa.fa-user
+              Sign Up
+          %p
+          %p If you already have account sign in below.
+          %a{'data-dismiss' => 'modal', 'data-toggle' => 'modal', :href => '#ModalLogin'}
+            %button.btn.btn-primary{:type => 'button'}
+              %i.fa.fa-sign-in
+              Sign in
+        -#%h2.block-title-2
+        -#  %span Already registered?
+        -#%a{'data-dismiss' => 'modal', 'data-toggle' => 'modal', :href => '#ModalLogin'}
+        -#  %button.btn.btn-primary{:type => 'button'}
+        -#    %i.fa.fa-sign-in
+        -#    Sign in
+        -#.col-xs-12.col-sm-4
+        -#  %h2.block-title-2
+        -#    %span Already registered?
+        -#  %a{'data-dismiss' => 'modal', 'data-toggle' => 'modal', :href => '#ModalLogin'}
+        -#    %button.btn.btn-primary{:type => 'button'}
+        -#      %i.fa.fa-sign-in
+        -#      Sign InSign in
+        .col-xs-12.col-sm-4
+          %h2.block-title-2
+            %span Checkout as Guest
+          %p Don't have an account and you don't want to register? Checkout as a guest instead!
+          %a.btn.btn-primary{:href => 'checkout-1.html'}
+            %i.fa.fa-sign-in
+            Checkout as Guest
+  %div{:style => 'clear:both'}
+.gap

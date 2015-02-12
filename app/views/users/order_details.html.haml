@@ -1,0 +1,260 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li
+          = link_to 'Dashboard', dashboard_path
+        %li.active Order Detail
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.fa.fa-list-alt
+          Order Details
+      .row.userInfo
+        .col-lg-12
+          %h2.block-title-2 Product Details
+        .col-xs-12.col-sm-12
+          %table.footable
+            %thead
+              %tr
+                %th{"data-class" => "expand", "data-sort-initial" => "true"}
+                  %span{:title => "table sorted by this column on load"} Product
+                %th{"data-class" => "expand", "data-sort-initial" => "true"}
+                  %span{:title => "table sorted by this column on load"} Product name
+                %th{"data-hide" => "phone,tablet", "data-sort-ignore" => "true"} Quantity
+                %th{"data-hide" => "phone,tablet"}
+                  %strong Product Price
+            %tbody
+              - if @order_details.present?
+                - @order_details.each do |order_detail|
+                  %tr
+                    %td{:style => 'text-align:center; width:10%'}
+                      = image_tag order_detail.product.product_photos.first.image_url(:thumb_small), :width => 60, :height => 80
+                    %td
+                      = link_to order_detail.product.name, product_path(order_detail.product.id)
+                    %td
+                      = order_detail.quantity if order_detail.quantity.present?
+                    %td
+                      = order_detail.product_price if order_detail.product_price.present?
+
+
+        .row.userInfo
+        .col-lg-12
+          %h1.block-title-2 Payment Info
+        .col-xs-12.col-sm-12
+          %table.footable
+            %tbody
+              - if @order.present?
+
+                %tr
+                  %td{:style => 'width: 20%'}
+                    %strong
+                      Payment Type
+                  %td
+                    = @order.payment.payment_type if @order.payment.payment_type.present?
+                %tr
+                  %td
+                    %strong
+                      Status
+                  %td
+                    = @order.payment.status if @order.payment.status.present?
+
+                %tr
+                  %td
+                    %strong
+                      Transaction Number
+                  %td
+                    = @order.payment.transaction_number if @order.payment.transaction_number.present?
+
+                %tr
+                  - if @order.payment.payment_type == Payment::PAYMENT_TYPE[:bikash]
+                    %td
+                      %strong
+                        Transaction Mobile Number
+                    %td
+                      = @order.payment.transaction_mobile_number if @order.payment.transaction_mobile_number.present?
+
+
+
+        .row.userInfo
+        .col-lg-12
+          %h1.block-title-2 Shipment Details
+        .col-xs-12.col-sm-12
+          %table.footable
+            %tbody
+              - if @order.present?
+                %tr
+                  %td{:style => 'width: 20%'}
+                    %strong
+                      Status
+                  %td
+                    = @order.shipment.status if @order.shipment.status.present?
+                %tr
+                  %td
+                    %strong
+                      Shipping Date
+                  %td
+                    = @order.shipment.shipping_date if @order.shipment.shipping_date.present?
+
+                %tr
+                  %td
+                    %strong
+                      First Name
+                  %td
+                    = @order.shipment.first_name if @order.shipment.first_name.present?
+                %tr
+                  %td
+                    %strong
+                      Last Name
+                  %td
+                    = @order.shipment.last_name if @order.shipment.last_name.present?
+
+                %tr
+                  %td
+                    %strong
+                      Email
+                  %td
+                    = @order.shipment.email if @order.shipment.email.present?
+                %tr
+                  %td
+                    %strong
+                      Company
+                  %td
+                    = @order.shipment.company if @order.shipment.company.present?
+
+                %tr
+                  %td
+                    %strong
+                      Address
+                  %td
+                    = @order.shipment.address if @order.shipment.address.present?
+                %tr
+                  %td
+                    %strong
+                      City
+                  %td
+                    = @order.shipment.city if @order.shipment.city.present?
+
+                %tr
+                  %td
+                    %strong
+                      State
+                  %td
+                    = @order.shipment.state if @order.shipment.state.present?
+                %tr
+                  %td
+                    %strong
+                      Zip Code
+                  %td
+                    = @order.shipment.zip_code if @order.shipment.zip_code.present?
+
+                %tr
+                  %td
+                    %strong
+                      Country
+                  %td
+                    = @order.shipment.country if @order.shipment.country.present?
+                %tr
+                  %td
+                    %strong
+                      Mobile Phone
+                  %td
+                    = @order.shipment.mobile_phone if @order.shipment.mobile_phone.present?
+                %tr
+                  %td
+                    %strong
+                      Additional Information
+                  %td
+                    = @order.shipment.additional_information if @order.shipment.additional_information.present?
+
+
+
+        .row.userInfo
+        .col-lg-12
+          %h1.block-title-2 Billing Details
+        .col-xs-12.col-sm-12
+          %table.footable
+            %tbody
+              - if @order.present?
+
+                %tr
+                  %td{:style => 'width: 20%'}
+                    %strong
+                      First Name
+                  %td
+                    = @order.billing_detail.first_name if @order.billing_detail.first_name.present?
+                %tr
+                  %td
+                    %strong
+                      Last Name
+                  %td
+                    = @order.billing_detail.last_name if @order.billing_detail.last_name.present?
+
+                %tr
+                  %td
+                    %strong
+                      Email
+                  %td
+                    = @order.billing_detail.email if @order.billing_detail.email.present?
+                %tr
+                  %td
+                    %strong
+                      Company
+                  %td
+                    = @order.billing_detail.company if @order.billing_detail.company.present?
+
+                %tr
+                  %td
+                    %strong
+                      Address
+                  %td
+                    = @order.billing_detail.address if @order.billing_detail.address.present?
+                %tr
+                  %td
+                    %strong
+                      City
+                  %td
+                    = @order.billing_detail.city if @order.billing_detail.city.present?
+
+                %tr
+                  %td
+                    %strong
+                      State
+                  %td
+                    = @order.billing_detail.state if @order.billing_detail.state.present?
+                %tr
+                  %td
+                    %strong
+                      Zip Code
+                  %td
+                    = @order.billing_detail.zip_code if @order.billing_detail.zip_code.present?
+
+                %tr
+                  %td
+                    %strong
+                      Country
+                  %td
+                    = @order.billing_detail.country if @order.billing_detail.country.present?
+                %tr
+                  %td
+                    %strong
+                      Mobile Phone
+                  %td
+                    = @order.billing_detail.mobile_phone if @order.billing_detail.mobile_phone.present?
+                %tr
+                  %td
+                    %strong
+                      Additional Information
+                  %td
+                    = @order.billing_detail.additional_information if @order.billing_detail.additional_information.present?
+
+
+
+        .col-lg-12.clearfix
+          = render :partial => 'footer_dashboard_link'
+    .col-lg-3.col-md-3.col-sm-5
+  %div{:style => 'clear:both'}
+.gap

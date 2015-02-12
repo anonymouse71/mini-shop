@@ -1,0 +1,29 @@
+-#- two_class = ( && step == 'two') ? 'active' : ''
+-#- three_class = (defined?(step) && step == 'three') ? 'active' : ''
+
+- begin step rescue step = '' end
+- orderStepClass = order_step_class(step)
+
+.w100.clearfix
+  %ul.orderStep
+    %li{class: orderStepClass['2']}
+      %a{:href => shipping_info_path}
+        %i.fa.fa-map-marker
+        %span address
+    %li{class: orderStepClass['3']}
+      %a{:href => billing_info_path}
+        %i.fa.fa.fa-envelope
+        %span Billing
+    %li{class: orderStepClass['4']}
+      %a{:href => shipping_method_path}
+        %i.fa.fa-truck
+        %span Shipping
+    %li{class: orderStepClass['5']}
+      %a{:href => payment_info_url}
+        %i.fa.fa-money
+        %span Payment
+    %li{class: orderStepClass['6']}
+      %a{:href => review_order_path}
+        %i.fa.fa-check-square
+        %span Order
+

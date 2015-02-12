@@ -1,0 +1,302 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li
+          = link_to 'Dashboard', root_path
+        %li.active Add Address
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.fa.fa-map-marker
+          Add Your addresses
+      .row.userInfo
+        .col-lg-12.col-xs-12
+          %h2.block-title-2 To add a new address, please fill out the form below.
+          %p.required
+            %sup *
+            Required field
+        %form
+          .col-xs-12.col-sm-6
+            .form-group.required
+              %label{:for => "InputName"}
+                First Name
+                %sup *
+              %input#InputName.form-control{:placeholder => "First Name", :required => "", :type => "text"}
+            .form-group.required
+              %label{:for => "InputLastName"}
+                Last Name
+                %sup *
+              %input#InputLastName.form-control{:placeholder => "Last Name", :required => "", :type => "text"}
+            .form-group
+              %label{:for => "InputCompany"} Company
+              %input#InputCompany.form-control{:placeholder => "Company", :type => "text"}
+            .form-group.required
+              %label{:for => "InputAddress"}
+                Address
+                %sup *
+              %input#InputAddress.form-control{:placeholder => "Address", :required => "", :type => "text"}
+            .form-group
+              %label{:for => "InputAddress2"} Address (Line 2)
+              %input#InputAddress2.form-control{:placeholder => "Address", :type => "text"}
+            .form-group.required
+              %label{:for => "InputCity"}
+                City
+                %sup *
+              %input#InputCity.form-control{:placeholder => "City", :required => "", :type => "text"}
+            .form-group.required
+              %label{:for => "State"}
+                State
+                %sup *
+              %select#State{"aria-required" => "true", :name => "State", :required => "", :style => "display: none;"}
+                %option{:value => ""} Choose
+                %option{:value => "1"} Alabama
+                %option{:value => "2"} Alaska
+                %option{:value => "3"} Arizona
+                %option{:value => "4"} Arkansas
+                %option{:value => "5"} California
+                %option{:value => "6"} Colorado
+                %option{:value => "7"} Connecticut
+                %option{:value => "8"} Delaware
+                %option{:value => "53"} District of Columbia
+                %option{:value => "9"} Florida
+                %option{:value => "10"} Georgia
+                %option{:value => "11"} Hawaii
+                %option{:value => "12"} Idaho
+                %option{:value => "13"} Illinois
+                %option{:value => "14"} Indiana
+                %option{:value => "15"} Iowa
+                %option{:value => "16"} Kansas
+                %option{:value => "17"} Kentucky
+                %option{:value => "18"} Louisiana
+                %option{:value => "19"} Maine
+                %option{:value => "20"} Maryland
+                %option{:value => "21"} Massachusetts
+                %option{:value => "22"} Michigan
+                %option{:value => "23"} Minnesota
+                %option{:value => "24"} Mississippi
+                %option{:value => "25"} Missouri
+                %option{:value => "26"} Montana
+                %option{:value => "27"} Nebraska
+                %option{:value => "28"} Nevada
+                %option{:value => "29"} New Hampshire
+                %option{:value => "30"} New Jersey
+                %option{:value => "31"} New Mexico
+                %option{:value => "32"} New York
+                %option{:value => "33"} North Carolina
+                %option{:value => "34"} North Dakota
+                %option{:value => "35"} Ohio
+                %option{:value => "36"} Oklahoma
+                %option{:value => "37"} Oregon
+                %option{:value => "38"} Pennsylvania
+                %option{:value => "51"} Puerto Rico
+                %option{:value => "39"} Rhode Island
+                %option{:value => "40"} South Carolina
+                %option{:value => "41"} South Dakota
+                %option{:value => "42"} Tennessee
+                %option{:value => "43"} Texas
+                %option{:value => "52"} US Virgin Islands
+                %option{:value => "44"} Utah
+                %option{:value => "45"} Vermont
+                %option{:value => "46"} Virginia
+                %option{:value => "47"} Washington
+                %option{:value => "48"} West Virginia
+                %option{:value => "49"} Wisconsin
+                %option{:value => "50"} Wyoming
+              .minict_wrapper
+                %input{:placeholder => "Select a choice", :type => "text", :value => ""}
+                  %ul
+                    %li{"data-value" => "1"} Alabama
+                    %li{"data-value" => "2"} Alaska
+                    %li{"data-value" => "3"} Arizona
+                    %li{"data-value" => "4"} Arkansas
+                    %li{"data-value" => "5"} California
+                    %li{"data-value" => "6"} Colorado
+                    %li{"data-value" => "7"} Connecticut
+                    %li{"data-value" => "8"} Delaware
+                    %li{"data-value" => "53"} District of Columbia
+                    %li{"data-value" => "9"} Florida
+                    %li{"data-value" => "10"} Georgia
+                    %li{"data-value" => "11"} Hawaii
+                    %li{"data-value" => "12"} Idaho
+                    %li{"data-value" => "13"} Illinois
+                    %li{"data-value" => "14"} Indiana
+                    %li{"data-value" => "15"} Iowa
+                    %li{"data-value" => "16"} Kansas
+                    %li{"data-value" => "17"} Kentucky
+                    %li{"data-value" => "18"} Louisiana
+                    %li{"data-value" => "19"} Maine
+                    %li{"data-value" => "20"} Maryland
+                    %li{"data-value" => "21"} Massachusetts
+                    %li{"data-value" => "22"} Michigan
+                    %li{"data-value" => "23"} Minnesota
+                    %li{"data-value" => "24"} Mississippi
+                    %li{"data-value" => "25"} Missouri
+                    %li{"data-value" => "26"} Montana
+                    %li{"data-value" => "27"} Nebraska
+                    %li{"data-value" => "28"} Nevada
+                    %li{"data-value" => "29"} New Hampshire
+                    %li{"data-value" => "30"} New Jersey
+                    %li{"data-value" => "31"} New Mexico
+                    %li{"data-value" => "32"} New York
+                    %li{"data-value" => "33"} North Carolina
+                    %li{"data-value" => "34"} North Dakota
+                    %li{"data-value" => "35"} Ohio
+                    %li{"data-value" => "36"} Oklahoma
+                    %li{"data-value" => "37"} Oregon
+                    %li{"data-value" => "38"} Pennsylvania
+                    %li{"data-value" => "51"} Puerto Rico
+                    %li{"data-value" => "39"} Rhode Island
+                    %li{"data-value" => "40"} South Carolina
+                    %li{"data-value" => "41"} South Dakota
+                    %li{"data-value" => "42"} Tennessee
+                    %li{"data-value" => "43"} Texas
+                    %li{"data-value" => "52"} US Virgin Islands
+                    %li{"data-value" => "44"} Utah
+                    %li{"data-value" => "45"} Vermont
+                    %li{"data-value" => "46"} Virginia
+                    %li{"data-value" => "47"} Washington
+                    %li{"data-value" => "48"} West Virginia
+                    %li{"data-value" => "49"} Wisconsin
+                    %li{"data-value" => "50"} Wyoming
+                    %li.minict_empty No results match your keyword.
+            .form-group.required
+              %label{:for => "InputZip"}
+                Zip / Postal Code
+                %sup *
+              %input#InputZip.form-control{:placeholder => "Zip / Postal Code", :required => "", :type => "text"}
+            .form-group.required
+              %label{:for => "InputCountry"}
+                Country
+                %sup *
+              %select#InputCountry.form-control{:name => "InputCountry", :required => "", :style => "display: none;"}
+                %option{:value => "38"} Algeria
+                %option{:value => "39"} American Samoa
+                %option{:value => "40"} Andorra
+                %option{:value => "41"} Angola
+                %option{:value => "42"} Anguilla
+                %option{:value => "43"} Antigua and Barbuda
+                %option{:value => "44"} Argentina
+                %option{:value => "45"} Armenia
+                %option{:value => "46"} Aruba
+                %option{:value => "24"} Australia
+                %option{:value => "2"} Austria
+                %option{:value => "47"} Azerbaijan
+                %option{:value => "48"} Bahamas
+                %option{:value => "49"} Bahrain
+                %option{:value => "50"} Bangladesh
+                %option{:value => "3"} Belgium
+                %option{:value => "34"} Bolivia
+                %option{:value => "4"} Canada
+                %option{:value => "5"} China
+                %option{:value => "16"} Czech Republic
+                %option{:value => "20"} Denmark
+                %option{:value => "7"} Finland
+                %option{:value => "8"} France
+                %option{:value => "1"} Germany
+                %option{:value => "9"} Greece
+                %option{:value => "22"} HongKong
+                %option{:value => "26"} Ireland
+                %option{:value => "29"} Israel
+                %option{:value => "10"} Italy
+                %option{:value => "32"} Ivory Coast
+                %option{:value => "11"} Japan
+                %option{:value => "12"} Luxemburg
+                %option{:value => "35"} Mauritius
+                %option{:value => "13"} Netherlands
+                %option{:value => "27"} New Zealand
+                %option{:value => "31"} Nigeria
+                %option{:value => "23"} Norway
+                %option{:value => "14"} Poland
+                %option{:value => "15"} Portugal
+                %option{:value => "36"} Romania
+                %option{:value => "25"} Singapore
+                %option{:value => "37"} Slovakia
+                %option{:value => "30"} South Africa
+                %option{:value => "28"} South Korea
+                %option{:value => "6"} Spain
+                %option{:value => "18"} Sweden
+                %option{:value => "19"} Switzerland
+                %option{:value => "33"} Togo
+                %option{:value => "17"} United Kingdom
+                %option{:selected => "selected", :value => "21"} United States
+              .minict_wrapper
+                %input{:placeholder => "United States", :type => "text", :value => "United States"}
+                  %ul
+                    %li{"data-value" => "38"} Algeria
+                    %li{"data-value" => "39"} American Samoa
+                    %li{"data-value" => "40"} Andorra
+                    %li{"data-value" => "41"} Angola
+                    %li{"data-value" => "42"} Anguilla
+                    %li{"data-value" => "43"} Antigua and Barbuda
+                    %li{"data-value" => "44"} Argentina
+                    %li{"data-value" => "45"} Armenia
+                    %li{"data-value" => "46"} Aruba
+                    %li{"data-value" => "24"} Australia
+                    %li{"data-value" => "2"} Austria
+                    %li{"data-value" => "47"} Azerbaijan
+                    %li{"data-value" => "48"} Bahamas
+                    %li{"data-value" => "49"} Bahrain
+                    %li{"data-value" => "50"} Bangladesh
+                    %li{"data-value" => "3"} Belgium
+                    %li{"data-value" => "34"} Bolivia
+                    %li{"data-value" => "4"} Canada
+                    %li{"data-value" => "5"} China
+                    %li{"data-value" => "16"} Czech Republic
+                    %li{"data-value" => "20"} Denmark
+                    %li{"data-value" => "7"} Finland
+                    %li{"data-value" => "8"} France
+                    %li{"data-value" => "1"} Germany
+                    %li{"data-value" => "9"} Greece
+                    %li{"data-value" => "22"} HongKong
+                    %li{"data-value" => "26"} Ireland
+                    %li{"data-value" => "29"} Israel
+                    %li{"data-value" => "10"} Italy
+                    %li{"data-value" => "32"} Ivory Coast
+                    %li{"data-value" => "11"} Japan
+                    %li{"data-value" => "12"} Luxemburg
+                    %li{"data-value" => "35"} Mauritius
+                    %li{"data-value" => "13"} Netherlands
+                    %li{"data-value" => "27"} New Zealand
+                    %li{"data-value" => "31"} Nigeria
+                    %li{"data-value" => "23"} Norway
+                    %li{"data-value" => "14"} Poland
+                    %li{"data-value" => "15"} Portugal
+                    %li{"data-value" => "36"} Romania
+                    %li{"data-value" => "25"} Singapore
+                    %li{"data-value" => "37"} Slovakia
+                    %li{"data-value" => "30"} South Africa
+                    %li{"data-value" => "28"} South Korea
+                    %li{"data-value" => "6"} Spain
+                    %li{"data-value" => "18"} Sweden
+                    %li{"data-value" => "19"} Switzerland
+                    %li{"data-value" => "33"} Togo
+                    %li{"data-value" => "17"} United Kingdom
+                    %li.selected{"data-value" => "21"} United States
+                    %li.minict_empty No results match your keyword.
+          .col-xs-12.col-sm-6
+            .form-group
+              %label{:for => "InputAdditionalInformation"} Additional information
+              %textarea#InputAdditionalInformation.form-control{:cols => "26", :name => "InputAdditionalInformation", :rows => "3"}
+            .form-group.required
+              %label{:for => "InputMobile"}
+                Mobile phone
+                %sup *
+              %input#InputMobile.form-control{:name => "InputMobile", :required => "", :type => "tel"}
+            .form-group.required
+              %label{:for => "addressAlias"}
+                Please assign an address title for future reference.
+                %sup *
+              %input#addressAlias.form-control{:name => "addressAlias", :required => "", :type => "text", :value => "My address"}
+          .col-lg-12.col-xs-12.clearfix
+            %button.btn.btn-primary{:type => "submit"}
+              %i.fa.fa-map-marker
+              Save Address
+        .col-lg-12.col-xs-12.clearfix
+          = render :partial => 'footer_dashboard_link'
+    .col-lg-3.col-md-3.col-sm-5
+  %div{:style => 'clear:both'}
+.gap

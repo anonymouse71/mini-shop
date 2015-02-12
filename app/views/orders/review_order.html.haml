@@ -1,0 +1,85 @@
+.container.main-container.headerOffset
+  = render partial: 'check_header'
+  .row
+    .col-lg-9.col-md-9.col-sm-12
+      .row.userInfo
+        .col-xs-12.col-sm-12
+          = render partial: 'check_nav', locals: {step: 'six'}
+          .w100.clearfix
+            .row.userInfo
+              .col-lg-12
+                %h2.block-title-2 Review Order
+              .col-xs-12.col-sm-12
+                -#= render :partial => 'cart_items'
+                .cartContent.w100.checkoutReview
+                  %table.cartTable.table-responsive{:style => "width:100%"}
+                    %tbody
+                      %tr.CartProduct.cartTableHeader
+                        %th{:style => "width:15%"} Product
+                        %th.checkoutReviewTdDetails Details
+                        %th{:style => "width:10%"} Unit Price
+                        %th.hidden-xs{:style => "width:5%"} QNT
+                        %th.hidden-xs{:style => "width:10%"} Discount
+                        %th{:style => "width:15%"} Total
+                      - if @cart_items.present?
+                        - @cart_items.each do |cart|
+                          %tr.CartProduct
+                            %td.CartProductThumb
+                              %div
+                                = link_to product_path(cart.product.id) do
+                                  = image_tag cart.product.product_photos.first.image_url(:thumb_medium)
+                            %td
+                              .CartDescription
+                                %h4
+                                  = link_to cart.product.name, product_path(cart.product.id)
+                            -#%span.size 12 x 1.5 L
+                            %td.delete
+                              .price
+                                = cart.product.price
+                            %td.hidden-xs
+                              = cart.quantity
+                            %td.hidden-xs 0
+                            %td.price
+                              = (cart.product.price * cart.quantity)
+                / cartContent
+                .w100.costDetails
+                  #order-detail-content.table-block
+                    %table#cart-summary.std.table
+                      %tr
+                        %td Total products
+                        %td.price
+                          {{ grandTotal() | currency }}
+                      %tr{:style => ''}
+                        %td Shipping
+                        %td.price
+                          %span.success Free shipping!
+                      -#%tr.cart-total-price
+                      -#  %td Total (tax excl.)
+                      -#  %td.price $216.51
+                      -#%tr
+                      -#  %td Total tax
+                      -#  %td#total-tax.price 0.00
+                      %tr
+                        %td Total
+                        %td#total-price.price
+                          {{ grandTotal() | currency }}
+                      %tbody
+
+          .cartFooter.w100
+            .box-footer
+              .pull-left
+                %a.btn.btn-default{:href => '/payment_info'}
+                  %i.fa.fa-arrow-left
+                  \&nbsp; Payment method
+              .pull-right
+                %a.btn.btn-primary.btn-small{:href => '/confirm_order'}
+                  Confirm Order &nbsp;
+                  %i.fa.fa-check
+
+    .col-lg-3.col-md-3.col-sm-12.rightSidebar
+      = render partial: 'check_sidebar'
+    / /rightSidebar
+  / /row
+  %div{:style => "clear:both"}
+/ /wrapper
+.gap

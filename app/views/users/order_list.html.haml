@@ -1,0 +1,68 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li
+          = link_to 'Dashboard', dashboard_path
+        %li.active Order List
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.fa.fa-list-alt
+          Order List
+      .row.userInfo
+        .col-lg-12
+          %h2.block-title-2 Your Order List
+        .col-xs-12.col-sm-12
+          %table.footable
+            %thead
+              %tr
+                %th{"data-class" => "expand", "data-sort-initial" => "true"}
+                  %span{:title => "table sorted by this column on load"} Order ID
+                %th{"data-hide" => "phone,tablet", "data-sort-ignore" => "true"} No. of items
+                -#%th{"data-hide" => "phone,tablet", "data-sort-ignore" => "true"} Invoice
+                %th{"data-hide" => "phone,tablet"}
+                  %strong Payment Method
+                %th{"data-hide" => "default"} Price
+                %th{"data-hide" => "default", "data-type" => "numeric"} Date
+                %th{"data-hide" => "phone", "data-type" => "numeric"} Status
+            %tbody
+              - if @order_list.present?
+                - @order_list.each do |order|
+                  %tr
+                    %td
+                      = link_to order.id, order_details_path(order.id)
+                    %td
+                      = order.order_details.count
+                      %small item(s)
+                    -#%td
+                      %a{:target => "_blank"} -
+                    %td
+                      = order.payment.payment_type if order.payment.present?
+                    %td
+                      = order.order_total
+                    %td{"data-value" => "78025368997"}
+                      = order.order_date.strftime("%d-%m-%Y")
+                    %td{"data-value" => "3"}
+                      - if order.order_status == Order::STATUS[:new]
+                        %span.label.label-default
+                          = Order::STATUS[:pending]
+                      - elsif order.order_status == Order::STATUS[:shipped]
+                        %span.label.label-primary
+                          = order.order_status if order.order_status.present?
+                      - elsif order.order_status == Order::STATUS[:canceled]
+                        %span.label.label-danger
+                          = order.order_status if order.order_status.present?
+                      - elsif order.order_status == Order::STATUS[:confirmed]
+                        %span.label.label-success
+                          = order.order_status if order.order_status.present?
+
+
+        .col-lg-12.clearfix
+          = render :partial => 'footer_dashboard_link'
+    .col-lg-3.col-md-3.col-sm-5
+  %div{:style => 'clear:both'}
+.gap

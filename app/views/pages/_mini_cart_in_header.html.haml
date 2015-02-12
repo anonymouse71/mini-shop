@@ -1,0 +1,27 @@
+.w100.miniCartTable.scroll-pane
+  %table
+    %tbody{ 'ng-repeat' => 'item in cartItems' }
+      %tr.miniCartProduct
+        %td.miniCartProductThumb{:style => "width:20%"}
+          %div
+            %a{:href => '#'}
+              -#= image_tag '3.jpg'
+              <img ng-src="{{ item.image }}">
+              -# TODO: change asset path
+        %td{:style => "width:40%"}
+          .miniCartDescription
+            %h4
+              %a{:href => '#'} {{ item.name }}
+            %span.size
+              -#12 x 1.5 L
+            .price
+              %span ${{ item.price }}
+        %td.miniCartQuantity{:style => "width:10%"}
+          %a X {{ item.quantity }}
+        %td.miniCartSubtotal{:style => "width:15%"}
+          %span ${{ item.price * item.quantity }}
+        %td.delete{:style => "width:5%;cursor:pointer;"}
+          %a{ 'ng-click' => 'removeItem(item.id)' } x
+
+  %p{ 'ng-show' => 'cartIsEmpty()' }
+    -#= '<br>-- Cart Is Empty --<br><br>'.html_safe

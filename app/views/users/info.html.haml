@@ -1,0 +1,61 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li
+          = link_to 'Dashboard', dashboard_path
+        %li.active My information
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.glyphicon.glyphicon-user
+          My personal information
+      .row.userInfo
+        .col-lg-12
+          %h2.block-title-2 Please be sure to update your personal information if it has changed.
+          %p.required
+            %sup *
+            Required field
+        = form_for @user, :url => account_settings_path, :html => {:method => :post} do |f|
+          .col-xs-12.col-sm-6
+            .form-group.required
+              %label{:for => "InputName"}
+                First Name
+                %sup *
+              = f.text_field :first_name, class: 'form-control', :placeholder => 'First Name', :size => '50'
+            .form-group.required
+              %label{:for => "InputLastName"}
+                Last Name
+                %sup *
+              = f.text_field :last_name, class: 'form-control', :placeholder => 'Last Name', :size => '50'
+            .form-group
+              %label{:for => "InputEmail"} Email
+              = f.text_field :email, class: 'form-control', :placeholder => 'Email', :size => '50'
+          .col-xs-12.col-sm-6
+            .form-group.required
+              %label{:for => "InputMobileNumber"}
+                Mobile Number
+                %sup *
+              = f.text_field :mobile, class: 'form-control', :placeholder => 'Mobile', :size => '50'
+            .form-group
+              %label{:for => "InputDateOfBirth"} Date of Birth
+              = f.text_field :date_of_birth, class: 'form-control', :placeholder => 'YYYY-MM-DD', :size => '50', :id=> 'date_of_birth'
+          .col-lg-12
+            %div
+              %div
+                = f.submit 'Submit', class:'btn btn-primary', :value => 'Submit'
+        .col-lg-12.clearfix
+          = render :partial => 'footer_dashboard_link'
+    .col-lg-3.col-md-3.col-sm-5
+  %div{:style => 'clear:both'}
+.gap
+
+:javascript
+  $(function(){
+    $('#date_of_birth').datepicker({
+        format: 'yyyy-mm-dd'
+    });
+  });

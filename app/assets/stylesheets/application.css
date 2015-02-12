@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require css/bootstrap.min
+ *= require css/bootstrap-theme.min
+ *= require css/skin-1
+ *= require css/style
+ *= require css/jquery.minimalect.min
+ *= require css/animate.min
+ *= require css/owl.carousel
+ *= require css/owl.theme
+ *= require css/ion.checkRadio
+ *= require css/ion.checkRadio.cloudy
+ *= require css/footable-0.1
+ *= require css/footable.sortable-0.1
+ *= require css/jquery.mCustomScrollbar
+ *= require smoothproducts
+ *= require datepicker
+ *= require_self
+ */
+
+/*.site-header {*/
+    /*border-bottom: 1px solid #ddd;*/
+/*}*/
+/*.product-container {*/
+    /*margin-bottom: 70px;*/
+    /*padding-top: 23px;*/
+/*}*/
+/*.category-title {*/
+    /*border-bottom: 1px solid #ddd;*/
+    /*padding-bottom: 10px;*/
+/*}*/
+/*.product-image {*/
+    /*width: 100%;*/
+    /*min-height: 190px;*/
+/*}*/
+/*.product-image img {*/
+    /*max-width: 100%;*/
+    /*max-height: 100%;*/
+/*}*/
+/*.product-name {*/
+    /*text-align: center;*/
+/*}*/
+/*.product-price {*/
+    /*text-align: center;*/
+/*}*/
+/*.product-add-to-cart {*/
+    /*text-align: center;*/
+/*}*/
+/*.footer {*/
+    /*border-top: 1px solid #ddd;*/
+    /*padding-top: 30px;*/
+    /*padding-bottom: 40px;*/
+/*}*/
+/*.footer-text {*/
+    /*margin-top: 20px;*/
+/*}*/
+
+
+.product .btn-primary {
+    background-image: linear-gradient(to bottom,#4EC67F 0,#4BB777 100%);
+    background-image: none;
+}
+.miniCartFooter .btn-primary {
+    background-color: #4ec67f;
+    background-image: none;
+}
+.miniCartFooter .btn-primary:hover {
+    background-color: #48C9B0;
+    background-image: none;
+    background-position: initial;
+}
+.miniCartFooter .btn-danger:hover {
+    background-image: none;
+    background-position: initial;
+}

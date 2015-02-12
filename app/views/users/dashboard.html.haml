@@ -1,0 +1,47 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li.active Dashboard
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.fa.fa-unlock-alt
+          Dashboard
+      .row.userInfo
+        .col-xs-12.col-sm-12
+          %h2.block-title-2
+            %span Welcome to your account. Here you can manage all of your personal information and orders.
+          %ul.myAccountList.row
+            %li.col-lg-2.col-md-2.col-sm-3.col-xs-4.text-center
+              .thumbnail.equalheight
+                = link_to(order_list_path) do
+                  %i.fa.fa-calendar
+                  Order history
+            %li.col-lg-2.col-md-2.col-sm-3.col-xs-4.text-center
+              .thumbnail.equalheight
+                = link_to(manage_address_path) do
+                  %i.fa.fa-map-marker
+                  My addresses
+            -#%li.col-lg-2.col-md-2.col-sm-3.col-xs-4.text-center
+            -#  .thumbnail.equalheight
+            -#    %a{:href => "add-address.html", :title => "Add  address"}
+            -#      %i.fa.fa-edit
+            -#      Add  address
+            %li.col-lg-2.col-md-2.col-sm-3.col-xs-4.text-center
+              .thumbnail.equalheight
+                = link_to(user_info_path) do
+                  %i.fa.fa-cog
+                  Personal information
+            -#%li.col-lg-2.col-md-2.col-sm-3.col-xs-4.text-center
+            -#  .thumbnail.equalheight
+            -#    %a{:href => "wishlist.html", :title => "My wishlists"}
+            -#      %i.fa.fa-heart
+            -#      My wishlists
+          .clear.clearfix
+    .col-lg-3.col-md-3.col-sm-5
+  %div{:style => "clear:both"}
+.gap

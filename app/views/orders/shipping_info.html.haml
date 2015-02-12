@@ -1,0 +1,84 @@
+/ /.Fixed navbar
+.container.main-container.headerOffset
+  = render partial: 'check_header'
+  .row
+    .col-lg-9.col-md-9
+      .col-sm-12
+        .row.userInfo
+          .col-xs-12.col-sm-12
+            = render partial: 'check_nav', locals: {step: 'two'}
+          .w100.clearfix
+            .row.userInfo
+              .col-lg-12
+                %h2.block-title-2 To add a new address, please fill out the form below.
+              = form_for @shipment do |f|
+                -#= f.hidden_field :country, :value => 'Bangladesh'
+                -#= f.hidden_field :cart_id, :value => session[:cart_id]
+                .col-xs-12.col-sm-6
+                  .form-group.required
+                    %label{:for => "InputName"}
+                      First Name
+                      %sup *
+                    = f.text_field :first_name, {:class => 'form-control' ,:placeholder => 'First Name', :required => ''}
+                  .form-group.required
+                    %label{:for => "InputLastName"}
+                      Last Name
+                      %sup *
+                    = f.text_field :last_name, {:class => 'form-control' ,:placeholder => 'Last Name', :required => ''}
+                  .form-group
+                    %label{:for => "InputEmail"} Email
+                    = f.email_field :email, {:class => 'form-control' ,:placeholder => 'Email', :required => ''}
+                  .form-group
+                    %label{:for => "InputCompany"} Company
+                    = f.text_field :company, {:class => 'form-control' ,:placeholder => 'Company'}
+                  .form-group.required
+                    %label{:for => "InputAddress"}
+                      Address
+                      %sup *
+                    = f.text_area :address, {:class => 'form-control' ,:placeholder => 'Address', :required => ''}
+                  .form-group.required
+                    %label{:for => "InputCity"}
+                      City
+                      %sup *
+                    = f.text_field :city, {:class => 'form-control' ,:placeholder => 'City', :required => ''}
+                  .form-group.required
+                    %label{:for => "InputState"}
+                      State
+                      %sup *
+                    = f.text_field :state, {:class => 'form-control' ,:placeholder => 'State', :required => ''}
+                .col-xs-12.col-sm-6
+                  .form-group.required
+                    %label{:for => "InputZip"}
+                      Zip / Postal Code
+                      %sup *
+                    = f.text_field :zip_code, {:class => 'form-control' ,:placeholder => 'Zip/ Postal Code', :required => ''}
+                  .form-group
+                    %label{:for => "InputAdditionalInformation"} Additional information
+                    = f.text_area :additional_information, {:class => 'form-control' ,:placeholder => 'Additional Information'}
+                  .form-group.required
+                    %label{:for => "InputMobile"}
+                      Mobile phone
+                      %sup *
+                    = f.text_field :mobile_phone, {:class => 'form-control' ,:placeholder => 'Mobile Phone', :required => ''}
+                    .form-group
+                      .pull-left
+                        = f.submit 'Submit', class:'btn btn-primary', :value => 'Save'
+
+          .cartFooter.w100
+            .box-footer
+              .pull-left
+                %a.btn.btn-default{:href => '/'}
+                  %i.fa.fa-arrow-left
+                  \&nbsp; Back to Shop
+              .pull-right
+                %a.btn.btn-primary.btn-small{:href => '/billing_info'}
+                  Billing address &nbsp;
+                  %i.fa.fa-arrow-circle-right
+
+    .col-lg-3.col-md-3.col-sm-12.rightSidebar
+      = render partial: 'check_sidebar'
+    / /rightSidebar
+  / /row
+  %div{:style => "clear:both"}
+/ /.main-container
+.gap

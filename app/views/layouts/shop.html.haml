@@ -1,0 +1,731 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    / Fav and touch icons
+    %link{:href => "assets/ico/apple-touch-icon-144-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "144x144"}/
+    %link{:href => "assets/ico/apple-touch-icon-114-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "114x114"}/
+    %link{:href => "assets/ico/apple-touch-icon-72-precomposed.png", :rel => "apple-touch-icon-precomposed", :sizes => "72x72"}/
+    %link{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/ico/apple-touch-icon-57-precomposed.png", :rel => "apple-touch-icon-precomposed"}/
+    %title Mini Mall
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+    / Just for debugging purposes.
+    / HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /[if lt IE 9]
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    / include pace script for automatic web page progress bar
+
+  :javascript
+    paceOptions = {
+      elements: true
+    };
+
+    function swapStyleSheet(sheet){
+      document.getElementById('pagestyle').setAttribute('href', sheet);
+    }
+
+  %body
+    / Modal Login start
+    #ModalLogin.modal.signUpContent.fade{:role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+            %h3.modal-title-site.text-center Login  to TSHOP
+          .modal-body
+            .form-group.login-username
+              %div
+                %input#login-user.form-control.input{:name => "log", :placeholder => "Enter Username", :size => "20", :type => "text"}/
+            .form-group.login-password
+              %div
+                %input#login-password.form-control.input{:name => "Password", :placeholder => "Password", :size => "20", :type => "password"}/
+            .form-group
+              %div
+                .checkbox.login-remember
+                  %label
+                    %input{:checked => "checked", :name => "rememberme", :type => "checkbox", :value => "forever"}/
+                    Remember Me
+            %div
+              %div
+                %input.btn.btn-block.btn-lg.btn-primary{:name => "submit", :type => "submit", :value => "LOGIN"}/
+
+          .modal-footer
+            %p.text-center
+              Not here before?
+              %a{"data-dismiss" => "modal", "data-toggle" => "modal", :href => "index4.html#ModalSignup"} Sign Up.
+              %br/
+              %a{:href => "forgot-password.html"} Lost your password?
+
+    #ModalSignup.modal.signUpContent.fade{:role => "dialog", :tabindex => "-1"}
+      .modal-dialog
+        .modal-content
+          .modal-header
+            %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+            %h3.modal-title-site.text-center REGISTER
+          .modal-body
+            .control-group
+              %a.fb_button.btn.btn-block.btn-lg{:href => "index4.html#"} SIGNUP WITH FACEBOOK
+            %h5.text-center{:style => "padding:10px 0 10px 0;"} OR
+            .form-group.reg-username
+              %div
+                %input.form-control.input{:name => "login", :placeholder => "Enter Username", :size => "20", :type => "text"}/
+            .form-group.reg-email
+              %div
+                %input.form-control.input{:name => "reg", :placeholder => "Enter Email", :size => "20", :type => "text"}/
+            .form-group.reg-password
+              %div
+                %input.form-control.input{:name => "password", :placeholder => "Password", :size => "20", :type => "password"}/
+            .form-group
+              %div
+                .checkbox.login-remember
+                  %label
+                    %input#rememberme{:checked => "checked", :name => "rememberme", :type => "checkbox", :value => "forever"}/
+                    Remember Me
+            %div
+              %div
+                %input.btn.btn-block.btn-lg.btn-primary{:name => "submit", :type => "submit", :value => "REGISTER"}/
+
+          .modal-footer
+            %p.text-center
+              Already member?
+              %a{"data-dismiss" => "modal", "data-toggle" => "modal", :href => "index4.html#ModalLogin"} Sign in
+    .navbar.navbar-tshop.navbar-fixed-top.megamenu{:role => "navigation"}
+      .navbar-top
+        .container
+          .row
+            .col-lg-6.col-sm-6.col-xs-6.col-md-6
+              .pull-left
+                %ul.userMenu
+                  %li
+                    %a{:href => "index4.html#"}
+                      %span.hidden-xs HELP
+                      %i.glyphicon.glyphicon-info-sign.hide.visible-xs
+                  %li.phone-number
+                    %a{:href => "callto:+8801680531352"}
+                      %span
+                        %i.glyphicon.glyphicon-phone-alt
+                      %span.hidden-xs{:style => "margin-left:5px"} 88 01680 53 1352
+            .col-lg-6.col-sm-6.col-xs-6.col-md-6.no-margin.no-padding
+              .pull-right
+                %ul.userMenu
+                  %li
+                    %a{:href => "account-1.html"}
+                      %span.hidden-xs My Account
+                      %i.glyphicon.glyphicon-user.hide.visible-xs
+                  %li
+                    %a{"data-target" => "#ModalLogin", "data-toggle" => "modal", :href => "index4.html#"}
+                      %span.hidden-xs Sign In
+                      %i.glyphicon.glyphicon-log-in.hide.visible-xs
+                  %li.hidden-xs
+                    %a{"data-target" => "#ModalSignup", "data-toggle" => "modal", :href => "index4.html#"} Create Account
+      .container
+        .navbar-header
+          %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
+            %span.sr-only Toggle navigation
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          %button.navbar-toggle{"data-target" => ".navbar-cart", "data-toggle" => "collapse", :type => "button"}
+            %i.fa.fa-shopping-cart.colorWhite
+            %span.cartRespons.colorWhite Cart ($210.00)
+          %a.navbar-brand{:href => "index.html"}
+            = image_tag 'logo.png'
+          .search-box.pull-right.hidden-lg.hidden-md.hidden-sm
+            .input-group
+              %button.btn.btn-nobg.getFullSearch{:type => "button"}
+                %i.fa.fa-search
+
+        .navbar-cart.collapse
+          .cartMenu.col-lg-4.col-xs-12.col-md-4
+            .w100.miniCartTable.scroll-pane
+              %table
+                %tbody
+                  %tr.miniCartProduct
+                    %td.miniCartProductThumb{:style => "20%"}
+                      %div
+                        %a{:href => "product-details.html"}
+                          = image_tag '3.jpg'
+                    %td{:style => "40%"}
+                      .miniCartDescription
+                        %h4
+                          %a{:href => "product-details.html"} TSHOP T shirt Black
+                        %span.size 12 x 1.5 L
+                        .price
+                          %span $8.80
+                    %td.miniCartQuantity{:style => "10%"}
+                      %a X 1
+                    %td.miniCartSubtotal{:style => "15%"}
+                      %span $8.80
+                    %td.delete{:style => "5%"}
+                      %a x
+                  %tr.miniCartProduct
+                    %td.miniCartProductThumb{:style => "20%"}
+                      %div
+                        %a{:href => "product-details.html"}
+                          = image_tag '2.jpg'
+                    %td{:style => "40%"}
+                      .miniCartDescription
+                        %h4
+                          %a{:href => "product-details.html"} TSHOP T shirt Black
+                        %span.size 12 x 1.5 L
+                        .price
+                          %span $8.80
+                    %td.miniCartQuantity{:style => "10%"}
+                      %a X 1
+                    %td.miniCartSubtotal{:style => "15%"}
+                      %span $8.80
+                    %td.delete{:style => "5%"}
+                      %a x
+                  %tr.miniCartProduct
+                    %td.miniCartProductThumb{:style => "20%"}
+                      %div
+                        %a{:href => "product-details.html"}
+                          = image_tag '5.jpg'
+                    %td{:style => "40%"}
+                      .miniCartDescription
+                        %h4
+                          %a{:href => "product-details.html"} TSHOP T shirt Black
+                        %span.size 12 x 1.5 L
+                        .price
+                          %span $8.80
+                    %td.miniCartQuantity{:style => "10%"}
+                      %a X 1
+                    %td.miniCartSubtotal{:style => "15%"}
+                      %span $8.80
+                    %td.delete{:style => "5%"}
+                      %a x
+                  %tr.miniCartProduct
+                    %td.miniCartProductThumb{:style => "20%"}
+                      %div
+                        %a{:href => "product-details.html"}
+                          = image_tag '3.jpg'
+                    %td{:style => "40%"}
+                      .miniCartDescription
+                        %h4
+                          %a{:href => "product-details.html"} TSHOP T shirt Black
+                        %span.size 12 x 1.5 L
+                        .price
+                          %span $8.80
+                    %td.miniCartQuantity{:style => "10%"}
+                      %a X 1
+                    %td.miniCartSubtotal{:style => "15%"}
+                      %span $8.80
+                    %td.delete{:style => "5%"}
+                      %a x
+                  %tr.miniCartProduct
+                    %td.miniCartProductThumb{:style => "20%"}
+                      %div
+                        %a{:href => "product-details.html"}
+                          = image_tag '3.jpg'
+                    %td{:style => "40%"}
+                      .miniCartDescription
+                        %h4
+                          %a{:href => "product-details.html"} TSHOP T shirt Black
+                        %span.size 12 x 1.5 L
+                        .price
+                          %span $8.80
+                    %td.miniCartQuantity{:style => "10%"}
+                      %a X 1
+                    %td.miniCartSubtotal{:style => "15%"}
+                      %span $8.80
+                    %td.delete{:style => "5%"}
+                      %a x
+                  %tr.miniCartProduct
+                    %td.miniCartProductThumb{:style => "20%"}
+                      %div
+                        %a{:href => "product-details.html"}
+                          = image_tag '4.jpg'
+                    %td{:style => "40%"}
+                      .miniCartDescription
+                        %h4
+                          %a{:href => "product-details.html"} TSHOP T shirt Black
+                        %span.size 12 x 1.5 L
+                        .price
+                          %span $8.80
+                    %td.miniCartQuantity{:style => "10%"}
+                      %a X 1
+                    %td.miniCartSubtotal{:style => "15%"}
+                      %span $8.80
+                    %td.delete{:style => "5%"}
+                      %a x
+
+            .miniCartFooter.miniCartFooterInMobile.text-right
+              %h3.text-right.subtotal Subtotal: $210
+              %a.btn.btn-sm.btn-danger
+                %i.fa.fa-shopping-cart
+                VIEW CART
+              %a.btn.btn-sm.btn-primary CHECKOUT
+
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            %li.active
+              %a{:href => "index4.html#"} Home
+            %li.dropdown.megamenu-fullwidth
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "index4.html#"}
+                New Products
+                %b.caret
+              %ul.dropdown-menu
+                %li.megamenu-content
+                  %ul.col-lg-3.col-sm-3.col-md-3.unstyled.noMarginLeft.newCollectionUl
+                    %li.no-border
+                      %p.promo-1
+                        %strong NEW COLLECTION
+                    %li
+                      %a{:href => "category.html"} ALL NEW PRODUCTS
+                    %li
+                      %a{:href => "category.html"} NEW TOPS
+                    %li
+                      %a{:href => "category.html"} NEW SHOES
+                    %li
+                      %a{:href => "category.html"} NEW TSHIRT
+                    %li
+                      %a{:href => "category.html"} NEW TSHOP
+                  %ul.col-lg-3.col-sm-3.col-md-3.col-xs-4
+                    %li
+                      %a.newProductMenuBlock{:href => "product-details.html"}
+                        = image_tag 'promo1.jpg', :class => 'img-responsive'
+                        %span.ProductMenuCaption
+                          %i.fa.fa-caret-right
+                          JEANS
+                  %ul.col-lg-3.col-sm-3.col-md-3.col-xs-4
+                    %li
+                      %a.newProductMenuBlock{:href => "product-details.html"}
+                        = image_tag 'promo2.jpg', :class => 'img-responsive'
+                        %span.ProductMenuCaption
+                          %i.fa.fa-caret-right
+                          PARTY DRESS
+                  %ul.col-lg-3.col-sm-3.col-md-3.col-xs-4
+                    %li
+                      %a.newProductMenuBlock{:href => "product-details.html"}
+                        = image_tag 'promo3.jpg', :class => 'img-responsive'
+                        %span.ProductMenuCaption
+                          %i.fa.fa-caret-right
+                          SHOES
+            / change width of megamenu = use class > megamenu-fullwidth, megamenu-60width, megamenu-40width
+            %li.dropdown.megamenu-80width
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "index4.html#"}
+                SHOP
+                %b.caret
+              %ul.dropdown-menu
+                %li.megamenu-content
+                  / megamenu-content
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled.noMarginLeft
+                    %li
+                      %p
+                        %strong Women Collection
+                    %li
+                      %a{:href => "index4.html#"} Kameez
+                    %li
+                      %a{:href => "index4.html#"} Tops
+                    %li
+                      %a{:href => "index4.html#"} Shoes
+                    %li
+                      %a{:href => "index4.html#"} T shirt
+                    %li
+                      %a{:href => "index4.html#"} TSHOP
+                    %li
+                      %a{:href => "index4.html#"} Party  Dress
+                    %li
+                      %a{:href => "index4.html#"} Women Fragrances
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li
+                      %p
+                        %strong Men Collection
+                    %li
+                      %a{:href => "index4.html#"} Panjabi
+                    %li
+                      %a{:href => "index4.html#"} Male Fragrances
+                    %li
+                      %a{:href => "index4.html#"} Scarf
+                    %li
+                      %a{:href => "index4.html#"} Sandal
+                    %li
+                      %a{:href => "index4.html#"} Underwear
+                    %li
+                      %a{:href => "index4.html#"} Winter Collection
+                    %li
+                      %a{:href => "index4.html#"} Men Accessories
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li
+                      %p
+                        %strong Top Brands
+                    %li
+                      %a{:href => "index4.html#"} Diesel
+                    %li
+                      %a{:href => "index4.html#"} Farah
+                    %li
+                      %a{:href => "index4.html#"} G-Star RAW
+                    %li
+                      %a{:href => "index4.html#"} Lyle & Scott
+                    %li
+                      %a{:href => "index4.html#"} Pretty Green
+                    %li
+                      %a{:href => "index4.html#"} TSHOP
+                    %li
+                      %a{:href => "index4.html#"} TANJIM
+                  %ul.col-lg-3.col-sm-3.col-md-3.col-xs-6
+                    %li.no-margin.productPopItem
+                      %a{:href => "product-details.html"}
+                        = image_tag 'g4.jpg', :class => 'img-responsive'
+                      %a.text-center.productInfo.alpha90{:href => "product-details.html"}
+                        Eodem modo typi
+                        %br/
+                        %span $60
+                  %ul.col-lg-3.col-sm-3.col-md-3.col-xs-6
+                    %li.no-margin.productPopItem.relative
+                      %a{:href => "product-details.html"}
+                        = image_tag 'g5.jpg', :class => 'img-responsive'
+                      %a.text-center.productInfo.alpha90{:href => "product-details.html"}
+                        Eodem modo typi
+                        %br/
+                        %span $60
+            %li.dropdown.megamenu-fullwidth
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "index4.html#"}
+                PAGES
+                %b.caret
+              %ul.dropdown-menu
+                %li.megamenu-content
+                  / megamenu-content
+                  %h3.promo-1.no-margin.hidden-xs 28+ HTML PAGES ONLY $8 || AVAILABLE ONLY AT WRAP BOOTSTRAP
+                  %h3.promo-1sub.hidden-xs Complete Parallax E-Commerce Boostrap Template, Responsive on any Device, 10+ color Theme + Parallax Effect
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li.no-border
+                      %p
+                        %strong Home Pages
+                    %li
+                      %a{:href => "index.html"} Home Version 1
+                    %li
+                      %a{:href => "index2.html"} Home Version 2
+                    %li
+                      %a{:href => "index3.html"} Home Version 3 (BOXES)
+                    %li
+                      %a{:href => "index4.html"} Home Version 4 (LOOK 2)
+                    %li
+                      %a{:href => "index5.html"} Home Version 5 (LOOK 3)
+                    %li
+                      %a{:href => "index-header2.html"} Header Version 2
+                    %li
+                      %a{:href => "index-header3.html"} Header Version 3
+                    %li
+                      %a{:href => "index-static-search.html"}
+                        Header Version 4
+                        %br/
+                        ( Static Search Form)
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li.no-border
+                      %p
+                        %strong Featured Pages
+                    %li
+                      %a{:href => "category.html"} Category
+                    %li
+                      %a{:href => "sub-category.html"} Sub Category
+                    %li
+                      %a{:href => "category-list.html"} Category List View
+                    %li
+                      %a{:href => "product-details.html"} Product Details Version 1
+                    %li
+                      %a{:href => "product-details-style2.html"} Product Details Version 2
+                    %li
+                      %a{:href => "product-details-style3.html"} Product Details Version 3  (Custom Thumbnail Position)
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li.no-border
+                      %p
+                        %strong  
+                    %li
+                      %a{:href => "cart.html"} Cart
+                    %li
+                      %a{:href => "about-us.html"} About us
+                    %li
+                      %a{:href => "about-us-2.html"} About us 2 (no parallax)
+                    %li
+                      %a{:href => "contact-us.html"} Contact us
+                    %li
+                      %a{:href => "contact-us-2.html"} Contact us 2 (No Fixed Map)
+                    %li
+                      %a{:href => "terms-conditions.html"} Terms & Conditions
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li.no-border
+                      %p
+                        %strong Checkout
+                    %li
+                      %a{:href => "checkout-0.html"} Checkout Before
+                    %li
+                      %a{:href => "checkout-1.html"} checkout step 1
+                    %li
+                      %a{:href => "checkout-2.html"} checkout step 2
+                    %li
+                      %a{:href => "checkout-3.html"} checkout step 3
+                    %li
+                      %a{:href => "checkout-4.html"} checkout step 4
+                    %li
+                      %a{:href => "checkout-5.html"} checkout step 5
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li.no-border
+                      %p
+                        %strong User Account
+                    %li
+                      %a{:href => "account-1.html"} Account Login
+                    %li
+                      %a{:href => "account.html"} My Account
+                    %li
+                      %a{:href => "my-address.html"} My Address
+                    %li
+                      %a{:href => "user-information.html"} User information
+                    %li
+                      %a{:href => "wishlist.html"} Wisth list
+                    %li
+                      %a{:href => "order-list.html"} Order list
+                    %li
+                      %a{:href => "forgot-password.html"} Forgot Password
+                  %ul.col-lg-2.col-sm-2.col-md-2.unstyled
+                    %li.no-border
+                      %p
+                        %strong  
+                    %li
+                      %a{:href => "error-page.html"} Error Page
+                    %li
+                      %a{:href => "blank-page.html"} Blank Page
+                    %li
+                      %a{:href => "form.html"} Basic Form Element
+          / - this part will be hidden for mobile version
+          .nav.navbar-nav.navbar-right.hidden-xs
+            .dropdown.cartMenu
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "index4.html#"}
+                %i.fa.fa-shopping-cart
+                %span.cartRespons Cart ($210.00)
+                %b.caret
+              .dropdown-menu.col-lg-4.col-xs-12.col-md-4
+                .w100.miniCartTable.scroll-pane
+                  %table
+                    %tbody
+                      %tr.miniCartProduct
+                        %td.miniCartProductThumb{:style => "width:20%"}
+                          %div
+                            %a{:href => "product-details.html"}
+                              = image_tag '3.jpg'
+                        %td{:style => "width:40%"}
+                          .miniCartDescription
+                            %h4
+                              %a{:href => "product-details.html"} TSHOP Tshirt DO9
+                            %span.size 12 x 1.5 L
+                            .price
+                              %span $22
+                        %td.miniCartQuantity{:style => "width:10%"}
+                          %a X 1
+                        %td.miniCartSubtotal{:style => "width:15%"}
+                          %span $33
+                        %td.delete{:style => "width:5%"}
+                          %a x
+                      %tr.miniCartProduct
+                        %td.miniCartProductThumb{:style => "width:20%"}
+                          %div
+                            %a{:href => "product-details.html"}
+                              = image_tag '2.jpg'
+                        %td{:style => "width:40%"}
+                          .miniCartDescription
+                            %h4
+                              %a{:href => "product-details.html"} TShir TSHOP 09
+                            %span.size 12 x 1.5 L
+                            .price
+                              %span $15
+                        %td.miniCartQuantity{:style => "width:10%"}
+                          %a X 1
+                        %td.miniCartSubtotal{:style => "width:15%"}
+                          %span $120
+                        %td.delete{:style => "width:5%"}
+                          %a x
+                      %tr.miniCartProduct
+                        %td.miniCartProductThumb{:style => "width:20%"}
+                          %div
+                            %a{:href => "product-details.html"}
+                              = image_tag '5.jpg'
+                        %td{:style => "width:40%"}
+                          .miniCartDescription
+                            %h4
+                              %a{:href => "product-details.html"} Tshir 2014
+                            %span.size 12 x 1.5 L
+                            .price
+                              %span $30
+                        %td.miniCartQuantity{:style => "width:10%"}
+                          %a X 1
+                        %td.miniCartSubtotal{:style => "width:15%"}
+                          %span $80
+                        %td.delete{:style => "width:5%"}
+                          %a x
+                      %tr.miniCartProduct
+                        %td.miniCartProductThumb{:style => "width:20%"}
+                          %div
+                            %a{:href => "product-details.html"}
+                              = image_tag '3.jpg'
+                        %td{:style => "width:40%"}
+                          .miniCartDescription
+                            %h4
+                              %a{:href => "product-details.html"} TSHOP T shirt DO20
+                            %span.size 12 x 1.5 L
+                            .price
+                              %span $15
+                        %td.miniCartQuantity{:style => "width:10%"}
+                          %a X 1
+                        %td.miniCartSubtotal{:style => "width:15%"}
+                          %span $55
+                        %td.delete{:style => "width:5%"}
+                          %a x
+                      %tr.miniCartProduct
+                        %td.miniCartProductThumb{:style => "width:20%"}
+                          %div
+                            %a{:href => "product-details.html"}
+                              = image_tag '4.jpg'
+                        %td{:style => "width:40%"}
+                          .miniCartDescription
+                            %h4
+                              %a{:href => "product-details.html"} T shirt Black
+                            %span.size 12 x 1.5 L
+                            .price
+                              %span $44
+                        %td.miniCartQuantity{:style => "width:10%"}
+                          %a X 1
+                        %td.miniCartSubtotal{:style => "width:15%"}
+                          %span $40
+                        %td.delete{:style => "width:5%"}
+                          %a x
+                      %tr.miniCartProduct
+                        %td.miniCartProductThumb{:style => "width:20%"}
+                          %div
+                            %a{:href => "product-details.html"}
+                              = image_tag 'winter.jpg'
+                        %td{:style => "width:40%"}
+                          .miniCartDescription
+                            %h4
+                              %a{:href => "product-details.html"} G Star T shirt
+                            %span.size 12 x 1.5 L
+                            .price
+                              %span $80
+                        %td.miniCartQuantity{:style => "width:10%"}
+                          %a X 1
+                        %td.miniCartSubtotal{:style => "width:15%"}
+                          %span $8.80
+                        %td.delete{:style => "width:5%"}
+                          %a x
+                / /.miniCartTable
+                .miniCartFooter.text-right
+                  %h3.text-right.subtotal Subtotal: $210
+                  %a.btn.btn-sm.btn-danger
+                    %i.fa.fa-shopping-cart
+                    VIEW CART
+                  %a.btn.btn-sm.btn-primary CHECKOUT
+
+            .search-box
+              .input-group
+                %button.btn.btn-nobg.getFullSearch{:type => "button"}
+                  %i.fa.fa-search
+
+      .search-full.text-right
+        %a.pull-right.search-close
+          %i.fa.fa-times-circle
+        .searchInputBox.pull-right
+          %input.search-input{"data-searchurl" => "search?=", :name => "q", :placeholder => "start typing and hit enter to search", :type => "search"}/
+          %button.btn-nobg.search-btn{:type => "submit"}
+            %i.fa.fa-search
+
+    = yield
+    %footer
+      #footer.footer
+        .container
+          .row
+            .col-lg-3.col-md-3.col-sm-4.col-xs-6
+              %h3 Support
+              %ul
+                %li.supportLi
+                  %p Lorem ipsum dolor sit amet, consectetur
+                  %h4
+                    %a.inline{:href => "callto:+8801680531352"}
+                      %strong
+                        %i.fa.fa-phone
+                        88 01680 531352
+                  %h4
+                    %a.inline{:href => "mailto:help@tshopweb.com"}
+                      %i.fa.fa-envelope-o
+                      help@tshopweb.com
+            .col-lg-2.col-md-2.col-sm-4.col-xs-6
+              %h3 Shop
+              %ul
+                %li
+                  %a{:href => "index.html"} Home
+                %li
+                  %a{:href => "category.html"} Category
+                %li
+                  %a{:href => "sub-category.html"} Sub Category
+            .col-lg-2.col-md-2.col-sm-4.col-xs-6
+              %h3 Information
+              %ul
+                %li
+                  %a{:href => "product-details.html"} Product Details
+                %li
+                  %a{:href => "product-details-style2.html"} Product Details Version 2
+                %li
+                  %a{:href => "cart.html"} Cart
+                %li
+                  %a{:href => "about-us.html"} About us
+                %li
+                  %a{:href => "about-us-2.html"} About us 2
+                %li
+                  %a{:href => "contact-us.html"} Contact us
+                %li
+                  %a{:href => "contact-us-2.html"} Contact us 2
+                %li
+                  %a{:href => "terms-conditions.html"} Terms & Conditions
+            .col-lg-2.col-md-2.col-sm-4.col-xs-6
+              %h3 My Account
+              %ul
+                %li
+                  %a{:href => "account-1.html"} Account Login
+                %li
+                  %a{:href => "account.html"} My Account
+                %li
+                  %a{:href => "my-address.html"} My Address
+                %li
+                  %a{:href => "wishlist.html"} Wisth list
+                %li
+                  %a{:href => "order-list.html"} Order list
+            .col-lg-3.col-md-3.col-sm-6.col-xs-12
+              %h3 Stay in touch
+              %ul
+                %li
+                  .input-append.newsLatterBox.text-center
+                    %input.full.text-center{:placeholder => "Email ", :type => "text"}/
+                    %button.btn.bg-gray{:type => "button"}
+                      Subscribe
+                      %i.fa.fa-long-arrow-right
+              %ul.social
+                %li
+                  %a{:href => "http://facebook.com"}
+                    %i.fa.fa-facebook  
+                %li
+                  %a{:href => "http://twitter.com"}
+                    %i.fa.fa-twitter  
+                %li
+                  %a{:href => "https://plus.google.com"}
+                    %i.fa.fa-google-plus  
+                %li
+                  %a{:href => "http://youtube.com"}
+                    %i.fa.fa-pinterest  
+                %li
+                  %a{:href => "http://youtube.com"}
+                    %i.fa.fa-youtube  
+
+      .footer-bottom
+        .container
+          %p.pull-left © TSHOP 2014. All right reserved.
+          .pull-right.paymentMethodImg
+            = image_tag 'payment/master_card.png', :class => 'pull-right', :height => 30
+            = image_tag 'payment/paypal.png', :class => 'pull-right', :height => 30
+            = image_tag 'payment/american_express_card.png', :class => 'pull-right', :height => 30
+            = image_tag 'payment/discover_network_card.png', :class => 'pull-right', :height => 30
+            = image_tag 'payment/master_card.png', :class => 'pull-right', :height => 30
+            = image_tag 'payment/google_wallet.png', :class => 'pull-right', :height => 30
+
+

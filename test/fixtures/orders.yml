@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  cart_id: 1
+  order_status: MyString
+  order_date: 2014-09-28 00:50:36
+  order_total: 1.5
+  shipping_address: MyString
+  message_by_customer: MyString
+  comment_by_admin: MyString
+  shipping_cost: 1.5
+
+two:
+  user_id: 1
+  cart_id: 1
+  order_status: MyString
+  order_date: 2014-09-28 00:50:36
+  order_total: 1.5
+  shipping_address: MyString
+  message_by_customer: MyString
+  comment_by_admin: MyString
+  shipping_cost: 1.5

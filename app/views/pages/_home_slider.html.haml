@@ -1,0 +1,33 @@
+.col-sm-10.show-case-wrapper.center-block.relative
+  #productShowCase.owl-carousel.owl-theme
+    - if @sliders.present?
+      - @sliders.each do |slider|
+        - if slider.product.present? && (slider.product.is_published == true) && (slider.product.is_deleted == false)
+          .product-slide
+            .col-sm-5.product-slide-left
+              %a.product-slide-img{:href => product_path(slider.product.id)}
+                = image_tag slider.product.product_photos.first.image_url(:list).to_s, :class => 'img-responsive' if slider.product.product_photos.present?
+
+            .col-sm-7
+              .product-slide-inner
+                %h1.product-title
+                  = slider.product.name
+                %h3.product-code
+                  = 'Product Code : ' + slider.product.product_code if slider.product.product_code.present?
+                .product-price
+                  %span.price-sales
+                    = to_bdt(slider.product.price)
+                  -#%span.price-standard
+                .details-description
+                  = slider.product.short_description.html_safe
+                -#%a.btn.btn-stroke-dark{:title => 'Add to Cart'}
+                %a.btn.btn-stroke-dark{'ng-click' => "addToCart(#{slider.product.id})"}
+                  %i.glyphicon.glyphicon-shopping-cart
+                  Add to Cart
+
+  %div{:style => "clear:both;"}
+
+  %a#ps-next.ps-nav
+    %i.fa.fa-angle-right
+  %a#ps-prev.ps-nav
+    %i.fa.fa-angle-left

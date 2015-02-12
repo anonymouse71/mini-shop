@@ -1,0 +1,21 @@
+.row
+  .breadcrumbDiv.col-lg-12
+    %ul.breadcrumb
+      %li
+        = link_to 'Home', root_path
+      %li
+        = link_to 'Cart', ''
+      %li.active Checkout
+/ /.row
+.row
+  .col-lg-9.col-md-9.col-sm-7
+    %h1.section-title-inner
+      %span
+        %i.glyphicon.glyphicon-shopping-cart
+        Checkout
+  .col-lg-3.col-md-3.col-sm-5.rightSidebar
+    %h4.caps
+      %a{:href => '/'}
+        %i.fa.fa-chevron-left
+        Back to shopping
+

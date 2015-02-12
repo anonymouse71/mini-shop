@@ -1,0 +1,30 @@
+-#= render :partial => 'cart_items'
+.cartContent.w100.checkoutReview
+  %table.cartTable.table-responsive{:style => "width:100%"}
+    %thead
+      %tr.CartProduct.cartTableHeader
+        %th{:style => "width:15%"} Product
+        %th.checkoutReviewTdDetails Details
+        %th{:style => "width:10%"} Unit Price
+        %th.hidden-xs{:style => "width:5%"} QNT
+        %th.hidden-xs{:style => "width:10%"} Discount
+        %th{:style => "width:15%"} Total
+
+    %tbody{ 'ng-repeat' => 'item in cartItems' }
+      %tr.CartProduct
+        %td.CartProductThumb
+          %div
+            <img ng-src="{{ item.image }}">
+        %td
+          .CartDescription
+            %h4
+              {{ item.product_path }}
+        -#%span.size 12 x 1.5 L
+        %td.delete
+          .price
+            ${{ item.price }}
+        %td.hidden-xs
+          {{ item.quantity }}
+        %td.hidden-xs 0
+        %td.price
+          ${{ item.price * item.quantity }}

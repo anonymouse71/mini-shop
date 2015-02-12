@@ -1,0 +1,226 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          = link_to 'Home', root_path
+        %li
+          = link_to 'All Products', category_path
+        %li.active= @product.name if @product.name.present?
+
+  - if @product.present?
+    .row.transitionfx
+      .col-lg-6.col-md-6.col-sm-6
+        .main-image.sp-wrap.col-lg-12.no-padding.style2
+          - @product.product_photos.each do |photo|
+            - if photo.present?
+              %a{:href => photo.image_url(:detail_zoom)}
+                = image_tag photo.image_url(:detail_large).to_s, :class => 'img-responsive'
+
+      .col-lg-6.col-md-6.col-sm-5
+        %h1.product-title= @product.name if @product.name.present?
+        %h3.product-code= @product.product_code if @product.product_code.present?
+        .product-price
+          %span.price-sales= number_to_currency(@product.price) if @product.price.present?
+          -#%span.price-standard 89
+        .details-description
+          %p= @product.description.html_safe if @product.description.present?
+          -#%span.selected-color
+          -#  %strong COLOR
+          -#%ul.swatches.Color
+          -#  %li.selected
+          -#    %a{:style => "background-color:#f1f40e"}
+          -#  %li
+          -#    %a{:style => "background-color:#adadad"}
+          -#  %li
+          -#    %a{:style => "background-color:#4EC67F"}
+        .productFilter
+          .filterBox
+            %select
+              %option{:selected => "", :value => "strawberries"} Quantity
+              %option{:value => 1} 1
+              %option{:value => 2} 2
+              %option{:value => 3} 3
+              %option{:value => 5} 4
+              %option{:value => 5} 5
+              %option{:value => 6} 6
+              %option{:value => 7} 7
+              %option{:value => 8} 8
+          -#.filterBox
+          -#  %select
+          -#    %option{:selected => "", :value => "strawberries"} Size
+          -#    %option{:value => "mango"} XL
+          -#    %option{:value => "bananas"} XXL
+          -#    %option{:value => "watermelon"} M
+          -#    %option{:value => "apples"} L
+          -#    %option{:value => "apples"} S
+        / productFilter
+        .cart-actions
+          .addto
+            %button.button.btn-cart.cart.first{'ng-click' => "addToCart(#{@product.id})"}
+              Add to Cart
+            -#%a.link-wishlist.wishlist Add to Wishlist
+          %div{:style => "clear:both"}
+          %h3.incaps
+            %i.fa.fa.fa-check-circle-o.color-in
+            In stock
+          -#%h3.incaps{:style => "display:none"}
+          -#  %i.fa.fa-minus-circle.color-out
+          -#  Out of stock
+          %h3.incaps
+            %i.glyphicon.glyphicon-lock
+            Secure online ordering
+        / /.cart-actions
+        .clear
+        .product-tab.w100.clearfix
+          %ul.nav.nav-tabs
+            %li.active
+              %a{"data-toggle" => "tab", :href => "product-details-style2.html#details"} Details
+            -#%li
+            -#  %a{"data-toggle" => "tab", :href => "product-details-style2.html#size"} Size
+            -#%li
+            -#  %a{"data-toggle" => "tab", :href => "product-details-style2.html#shipping"} Shipping
+          / Tab panes
+          .tab-content
+            #details.tab-pane.active
+              = @product.description if @product.description.present?
+            -##size.tab-pane
+            -#  16" waist
+            -#  %br
+            -#  34" inseam
+            -#  %br
+            -#  10.5" front rise
+            -#  %br
+            -#  8.5" knee
+            -#  %br
+            -#  7.5" leg opening
+            -#  %br
+            -#  %br
+            -#  Measurements taken from size 30
+            -#  %br
+            -#  Model wears size 31. Model is 6'2
+            -#  %br
+            -#  %br
+            #shipping.tab-pane
+              %table
+                %colgroup
+                  %col{:style => "width:33%"}
+                    %col{:style => "width:33%"}
+                      %col{:style => "width:33%"}
+                %tbody
+                  %tr
+                    %td Standard
+                    %td 1-5 business days
+                    %td $7.95
+                  %tr
+                    %td Two Day
+                    %td 2 business days
+                    %td $15
+                  %tr
+                    %td Next Day
+                    %td 1 business day
+                    %td $30
+                -#%tfoot
+                -#  %tr
+                -#    %td{:colspan => "3"} * Free on orders of $50 or more
+
+        %div{:style => "clear:both"}
+        .product-share.clearfix
+          %p SHARE
+          .socialIcon
+            %a{:href => "product-details-style2.html#"}
+              %i.fa.fa-facebook
+            %a{:href => "product-details-style2.html#"}
+              %i.fa.fa-twitter
+            %a{:href => "product-details-style2.html#"}
+              %i.fa.fa-google-plus
+            %a{:href => "product-details-style2.html#"}
+              %i.fa.fa-pinterest
+
+  -#.row.recommended
+  -#  %h1 YOU MAY ALOS LIKE
+  -#  #SimilarProductSlider
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag 'a1.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} YOUR LIFE
+  -#          .price
+  -#            %span $57
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag 'a2.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} RED CROWN
+  -#          .price
+  -#            %span $44
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag 'a3.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} WHITE GOLD
+  -#          .price
+  -#            %span $35
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag 'a4.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} DENIM 4240
+  -#          .price
+  -#            $
+  -#            %span 55
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag '30.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} CROWN ROCK
+  -#          .price
+  -#            %span $500
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag 'a5.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} SLIM ROCK
+  -#          .price
+  -#            %span $50
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag '36.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} ROCK T-Shirts
+  -#          .price
+  -#            %span $130
+  -#    / /.item
+  -#    .item
+  -#      .product
+  -#        %a.product-image
+  -#          - image_tag '13.jpg'
+  -#        .description
+  -#          %h4
+  -#            %a{:href => "http://demo.tanimdesign.net/template/tshop-v1.2/html/san-remo-spaghetti"} Denim T-Shirts
+  -#          .price
+  -#            %span $43
+
+  %div{:style => "clear:both"}
+/ /main-container
+.gap

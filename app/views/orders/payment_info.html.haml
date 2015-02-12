@@ -1,0 +1,180 @@
+/ /.Fixed navbar
+.container.main-container.headerOffset
+  = render partial: 'check_header'
+  .row
+    .col-lg-9.col-md-9.col-sm-12
+      .row.userInfo
+        .col-xs-12.col-sm-12
+          = render partial: 'check_nav', locals: {step: 'five'}
+          .w100.clearfix
+            .row.userInfo
+              .col-lg-12
+                %h2.block-title-2 Payment method
+                %p Please select the preferred shipping method to use on this order.
+                %hr
+              .col-xs-12.col-sm-12
+                .paymentBox
+                  #accordion.panel-group.paymentMethod
+                    .panel.panel-default
+                      .panel-heading.panel-heading-custom
+                        %h4.panel-title
+                          %a.masterCard{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "checkout-4.html#collapseThree"}
+                            %span.numberCircuil Option 1
+                            %strong Bikash
+                      #collapseThree.panel-collapse.collapse
+                        .panel-body
+
+                          .panel.open
+                            .creditCard
+                              .cartBottomInnerRight.paymentCard
+                              %span Bikash
+                              %span Payment Details
+                              = form_for @payment do |f|
+                                = f.hidden_field :payment_type, :value => Payment::PAYMENT_TYPE[:bikash]
+                                .paymentInput
+                                  %label{:for => "CardNumber"} Transaction Number *
+                                  %br
+                                  = f.text_field :transaction_number, {:class => 'form-control' ,:placeholder => 'Transaction Number', :required => ''}
+                                .paymentInput
+                                  %label{:for => "CardNumber2"} Transaction Mobile Number *
+                                  %br
+                                  = f.text_field :transaction_mobile_number, {:class => 'form-control' ,:placeholder => 'Transaction Mobile Number', :required => ''}
+                                .form-group
+                                  .pull-left
+                                    = f.submit 'Submit', class:'btn btn-primary', :value => 'Submit'
+
+
+                    .panel.panel-default
+                      .panel-heading.panel-heading-custom
+                        %h4.panel-title
+                          %a.cashOnDelivery{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "checkout-4.html#collapseOne"}
+                            %span.numberCircuil Option 2
+                            %strong Cash on Delivery
+                      #collapseOne.panel-collapse.collapse.in
+                        .panel-body
+                          %p All transactions are secure and encrypted, and we neverstor To learn more, please view our privacy policy.
+                          %br
+                          = form_for @payment do |f|
+                            = f.hidden_field :payment_type, :value => Payment::PAYMENT_TYPE[:cash_on_delivery]
+                            %label.radio-inline{:for => "radios-4"}
+                              %input#radios-4{:name => "radios", :checked => :checked ,:type => "radio", :value => "4"}
+                                Cash On Delivery
+                              .form-group
+                                .pull-left
+                                  = f.submit 'Submit', class:'btn btn-primary', :value => 'Submit'
+                    .panel.panel-default
+                      -#.panel-heading.panel-heading-custom
+                      -#  %h4.panel-title
+                      -#    %a{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "checkout-4.html#collapseTwo"}
+                      -#      %span.numberCircuil Option 2
+                      -#      %strong PayPal
+                      -##collapseTwo.panel-collapse.collapse
+                      -#  .panel-body
+                      -#    %p All transactions are secure and encrypted, and we neverstor To learn more, please view our privacy policy.
+                      -#    %br
+                      -#      %label.radio-inline{:for => "radios-3"}
+                      -#        %input#radios-3{:name => "radios", :type => "radio", :value => "4"}
+                      -#          = image_tag 'payment/paypal-small.png', :height => "18"
+                      -#          Checkout with Paypal
+                      -#      .form-group
+                      -#        %label{:for => "CommentsOrder2"} Add Comments About Your Order
+                      -#        %textarea#CommentsOrder2.form-control{:cols => "26", :name => "CommentsOrder2", :rows => "3"}
+                      -#      .form-group.clearfix
+                      -#        %label.checkbox-inline{:for => "checkboxes-0"}
+                      -#          %input#checkboxes-0{:name => "checkboxes", :type => "checkbox", :value => "1"}
+                      -#            I have read and agree to the
+                      -#            %a{:href => "terms-conditions.html"} Terms & Conditions
+                      -#      .pull-right
+                      -#        %a.btn.btn-primary.btn-small{:href => "checkout-5.html"}
+                      -#          Order &nbsp;
+                      -#          %i.fa.fa-arrow-circle-right
+                    -#.panel.panel-default
+                    -#  .panel-heading.panel-heading-custom
+                    -#    %h4.panel-title
+                    -#      %a.masterCard{"data-parent" => "#accordion", "data-toggle" => "collapse", :href => "checkout-4.html#collapseThree"}
+                    -#        %span.numberCircuil Option 3
+                    -#        %strong MasterCard
+                    -#  #collapseThree.panel-collapse.collapse
+                    -#    .panel-body
+                    -#      %p All transactions are secure and encrypted, and we neverstor To learn more, please view our privacy policy.
+                    -#      %br
+                    -#        .panel.open
+                    -#          .creditCard
+                    -#            .cartBottomInnerRight.paymentCard
+                    -#            %span Supported
+                    -#            %span Credit Cards
+                    -#            .paymentInput
+                    -#              %label{:for => "CardNumber"} Credit Card Number *
+                    -#              %br
+                    -#                %input#CardNumber{:name => "Number", :type => "text"}
+                    -#            / paymentInput
+                    -#            .paymentInput
+                    -#              %label{:for => "CardNumber2"} Name on Credit Card *
+                    -#              %br
+                    -#                %input#CardNumber2{:name => "CardNumber2", :type => "text"}
+                    -#            / paymentInput
+                    -#            .paymentInput
+                    -#              .form-group
+                    -#                %label Expiration date *
+                    -#                %br
+                    -#                  .col-lg-4.col-md-4.col-sm-4.no-margin-left.no-padding
+                    -#                    %select{"aria-required" => "true", :name => "expire", :required => ""}
+                    -#                      %option{:value => ""} Month
+                    -#                      %option{:value => "1"} 01 - January
+                    -#                      %option{:value => "2"} 02 - February
+                    -#                      %option{:value => "3"} 03 - March
+                    -#                      %option{:value => "4"} 04 - April
+                    -#                      %option{:value => "5"} 05 - May
+                    -#                      %option{:value => "6"} 06 - June
+                    -#                      %option{:value => "7"} 07 - July
+                    -#                      %option{:value => "8"} 08 - August
+                    -#                      %option{:value => "9"} 09 - September
+                    -#                      %option{:value => "10"} 10 - October
+                    -#                      %option{:value => "11"} 11 - November
+                    -#                      %option{:value => "12"} 12 - December
+                    -#                  .col-lg-4.col-md-4.col-sm-4
+                    -#                    %select{"aria-required" => "true", :name => "year", :required => ""}
+                    -#                      %option{:value => ""} Year
+                    -#                      %option{:value => "2013"} 2013
+                    -#                      %option{:value => "2014"} 2014
+                    -#                      %option{:value => "2015"} 2015
+                    -#                      %option{:value => "2016"} 2016
+                    -#                      %option{:value => "2017"} 2017
+                    -#                      %option{:value => "2018"} 2018
+                    -#                      %option{:value => "2019"} 2019
+                    -#                      %option{:value => "2020"} 2020
+                    -#                      %option{:value => "2021"} 2021
+                    -#                      %option{:value => "2022"} 2022
+                    -#                      %option{:value => "2023"} 2023
+                    -#            / paymentInput
+                    -#            %div{:style => "clear:both"}
+                    -#            .paymentInput.clearfix
+                    -#              %label{:for => "VerificationCode"} Verification Code *
+                    -#              %br
+                    -#                %input#VerificationCode{:name => "VerificationCode", :style => "width:90px;", :type => "text"}
+                    -#                  %br
+                    -#            / paymentInput
+                    -#            %div
+                    -#              %input#saveInfoid{:name => "saveInfo", :type => "checkbox"}
+                    -#                %label{:for => "saveInfoid"} &nbsp;Save my Card information
+                    -#          / creditCard
+                    -#          .pull-right
+                    -#            %a.btn.btn-primary.btn-small{:href => "checkout-5.html"}
+                    -#              Order &nbsp;
+                    -#              %i.fa.fa-arrow-circle-right
+
+
+          .cartFooter.w100
+            .box-footer
+              .pull-left
+                %a.btn.btn-default{:href => '/billing_info'}
+                  %i.fa.fa-arrow-left
+                  \&nbsp; Billing address
+
+    .col-lg-3.col-md-3.col-sm-12.rightSidebar
+      = render partial: 'check_sidebar'
+    / /rightSidebar
+  / /row
+  %div{:style => "clear:both"}
+/ /.main-container
+.gap

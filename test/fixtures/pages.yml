@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  permalink: MyString
+  content: MyText
+  priority: 1
+  is_published: false
+
+two:
+  title: MyString
+  permalink: MyString
+  content: MyText
+  priority: 1
+  is_published: false

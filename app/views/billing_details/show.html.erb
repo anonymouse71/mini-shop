@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @billing_detail.order_id %>
+</p>
+
+<p>
+  <strong>First name:</strong>
+  <%= @billing_detail.first_name %>
+</p>
+
+<p>
+  <strong>Last name:</strong>
+  <%= @billing_detail.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @billing_detail.email %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @billing_detail.company %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @billing_detail.address %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= @billing_detail.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @billing_detail.state %>
+</p>
+
+<p>
+  <strong>Zip code:</strong>
+  <%= @billing_detail.zip_code %>
+</p>
+
+<p>
+  <strong>Country:</strong>
+  <%= @billing_detail.country %>
+</p>
+
+<p>
+  <strong>Additional information:</strong>
+  <%= @billing_detail.additional_information %>
+</p>
+
+<p>
+  <strong>Mobile phone:</strong>
+  <%= @billing_detail.mobile_phone %>
+</p>
+
+<p>
+  <strong>Cart:</strong>
+  <%= @billing_detail.cart_id %>
+</p>
+
+<%= link_to 'Edit', edit_billing_detail_path(@billing_detail) %> |
+<%= link_to 'Back', billing_details_path %>

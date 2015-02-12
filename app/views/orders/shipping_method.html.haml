@@ -1,0 +1,48 @@
+/ /.Fixed navbar
+.container.main-container.headerOffset
+  = render partial: 'check_header'
+  .row
+    .col-lg-9.col-md-9.col-sm-12
+      .row.userInfo
+        .col-xs-12.col-sm-12
+          = render partial: 'check_nav', locals: {step: 'four'}
+          .w100.clearfix
+            .row.userInfo
+              .col-lg-12
+                %h2.block-title-2 Choose your delivery method
+
+                .form-group.col-lg-12.col-sm-12.col-md-12.-col-xs-12
+                  %table.table-bordered.table{:style => "width:100%"}
+                    %tbody
+                      %tr
+                        %td Carrier
+                        %td Method
+                        %td Information
+                        %td Price!
+                      %tr
+                        %td
+                          %label.radio
+                            %input#optionsRadios2{:checked => "", :name => "optionsRadios", :type => "radio", :value => "option2"}
+                              %i.fa.fa-truck.fa-2x
+                        %td By Road
+                        %td Delivery next day!
+                        %td Free!
+                / /row
+                .cartFooter.w100
+                  .box-footer
+                    .pull-left
+                      %a.btn.btn-default{:href => '/billing_info'}
+                        %i.fa.fa-arrow-left
+                        \&nbsp; Shipping address
+                    .pull-right
+                      %a.btn.btn-primary.btn-small{:href => '/payment_info'}
+                        Payment Method &nbsp;
+                        %i.fa.fa-arrow-circle-right
+
+    .col-lg-3.col-md-3.col-sm-12.rightSidebar
+      = render partial: 'check_sidebar'
+    / /rightSidebar
+  / /row
+  %div{:style => "clear:both"}
+/ /main-container
+.gap

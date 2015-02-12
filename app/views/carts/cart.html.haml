@@ -1,0 +1,101 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          %a{:href => '/'} Home
+        %li.active Cart
+  / /.row
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.glyphicon.glyphicon-shopping-cart
+          Shopping cart
+    .col-lg-3.col-md-3.col-sm-5.rightSidebar
+      %h4.caps
+        %a{:href => '/'}
+          %i.fa.fa-chevron-left
+          Back to shopping
+  / /.row
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      .row.userInfo
+        .col-xs-12.col-sm-12
+          .cartContent.w100
+            %table.cartTable.table-responsive{:style => "width:100%"}
+              %thead
+                %tr.CartProduct.cartTableHeader
+                  %td{:style => "width:15%"} Product
+                  %td{:style => "width:40%"} Details
+                  %td.delete{:style => "width:10%"} &nbsp;
+                  %td{:style => "width:10%"} QNT
+                  %td{:style => "width:10%"} Discount
+                  %td{:style => "width:15%"} Total
+
+                - if @cart_items.present?
+                  - @cart_items.each do |cart|
+                    %tr.CartProduct
+                      %td.CartProductThumb
+                        %div
+                          = link_to product_path(cart.product.id) do
+                            = image_tag cart.product.product_photos.first.image_url(:thumb_medium)
+                      %td
+                        .CartDescription
+                          %h4
+                            = link_to cart.product.name, product_path(cart.product.id)
+                          -#%span.size 12 x 1.5 L
+                          .price
+                            %span
+                              = to_bdt(cart.product.price)
+                      %td.delete
+                        %a{:title => "Delete"}
+                          %i.glyphicon.glyphicon-trash.fa-2x
+
+                      %td
+                        %input.quanitySniper.form-control{:name => "quanitySniper", :type => "text", :value => cart.quantity}
+
+                      %td 0
+                      %td.price
+                        = to_bdt(cart.product.price * cart.quantity)
+                -#%tbody{ 'ng-repeat' => 'item in cartItems' }
+                -#  %tr.CartProduct
+                -#    %td.CartProductThumb
+                -#      %div
+                -#        %a{:href => '#'}
+                -#          <img ng-src="{{ item.image }}">
+                -#    %td
+                -#      .CartDescription
+                -#        %h4
+                -#          %a{:href => '#'} {{ item.name }}
+                -#        -#%span.size 12 x 1.5 L
+                -#        .price
+                -#          %span
+                -#            BDT {{ item.price }}
+                -#    %td.delete
+                -#      %a{'ng-click' => 'removeItem(item.id)', :title => "Delete"}
+                -#        %i.glyphicon.glyphicon-trash.fa-2x
+                -#
+                -#    %td
+                -#      %input.quanitySniper.form-control{:name => "quanitySniper", :type => "text", :value => '9'}
+                -#
+                -#    %td 0
+                -#    %td.price
+                -#      BDT {{ item.price * item.quantity }}
+          / cartContent
+          .cartFooter.w100
+            .box-footer
+              .pull-left
+                %a.btn.btn-default{:href => '/'}
+                  %i.fa.fa-arrow-left
+                  \&nbsp; Continue shopping
+              .pull-right
+                %button.btn.btn-default{:type => "submit"}
+                  %i.fa.fa-undo
+                  \&nbsp; Update cart
+
+    .col-lg-3.col-md-3.col-sm-5.rightSidebar
+      = render :partial => 'checkout_sidebar'
+
+  %div{:style => "clear:both"}
+.gap

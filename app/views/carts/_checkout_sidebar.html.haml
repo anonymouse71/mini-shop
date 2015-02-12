@@ -1,0 +1,27 @@
+.contentBox
+  .w100.costDetails
+    #order-detail-content.table-block
+      %a.btn.btn-primary.btn-lg.btn-block{:href => '/checkout', :style => "margin-bottom:20px", :title => "checkout"}
+        Proceed to checkout &nbsp;
+        %i.fa.fa-arrow-right
+      .w100.cartMiniTable
+        %table#cart-summary.std.table
+          %tbody
+            %tr
+              %td Total products
+              %td.price
+                {{ grandTotal() | currency:"BDT " }}
+            %tr{:style => ""}
+              %td Shipping
+              %td.price
+                %span.success Free shipping!
+            %tr
+              %td Total
+              %td#total-price.site-color
+                {{ grandTotal() | currency:"BDT " }}
+            -#%tr
+            -#  %td{:colspan => "2"}
+            -#    .input-append.couponForm
+            -#      %input#appendedInputButton.col-lg-8{:placeholder => "Coupon code", :type => "text"}
+            -#        %button.col-lg-4.btn.btn-success{:type => "button"} Apply!
+          %tbody

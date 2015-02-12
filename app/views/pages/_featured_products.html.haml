@@ -1,0 +1,39 @@
+.container.main-container
+  / Main component call to action
+  .morePost.row.featuredPostContainer.style2.globalPaddingTop
+    .col-lg-12
+      %h3.boxes-title-1
+        %span All PRODUCTS
+    .container
+      .row.xsResponse
+        - @products.each do |product|
+          .item.col-lg-3.col-md-3.col-sm-4.col-xs-6
+            .product
+              -#%a.add-fav.tooltipHere{'data-original-title' => 'Add to Wishlist', 'data-placement' => 'left', 'data-toggle' => 'tooltip'}
+              -#  %i.glyphicon.glyphicon-heart
+              .image
+                %a{:href => product_path(product.id)}
+                  = image_tag product.product_photos.first.image_url(:list).to_s, :class => 'img-responsive' if product.product_photos.present?
+                -#.promotion
+                -#  %span.new-product NEW
+                -#  %span.discount 15% OFF
+              .description
+                %h4
+                  -#%a{:href => "product-details.html"} consectetuer adipiscing
+                  = link_to product.name, product_path(product.id)
+                - product_description = raw(product.short_description)
+                = truncate(product_description, length: 50, separator: '..') if product.short_description.present?
+                -#%span.size XL / XXL / S
+              .price
+                %span= product.price if product.price.present?
+              .action-control
+                %a.btn.btn-primary{'ng-click' => "addToCart(#{product.id})"}
+                  %span.add2cart
+                    %i.glyphicon.glyphicon-shopping-cart
+                    Add to cart
+
+      .row
+        .load-more-block.text-center
+          %a.btn.btn-thin{:href => "index4.html#"}
+            %i.fa.fa-plus-sign +
+            load more products

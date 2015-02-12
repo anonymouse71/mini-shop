@@ -1,0 +1,29 @@
+.container.main-container.headerOffset
+  .row
+    .breadcrumbDiv.col-lg-12
+      %ul.breadcrumb
+        %li
+          %a{:href => "index.html"} Home
+        %li.active Authentication
+  .row
+    .col-lg-9.col-md-9.col-sm-7
+      %h1.section-title-inner
+        %span
+          %i.fa.fa-lock
+          Authentication
+      .row.userInfo
+        .col-xs-12.col-sm-6
+          %h2.block-title-2 Login
+          = form_for resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'regForm', :method => :post} do |f|
+            .form-group
+              %label Email
+              = f.text_field :email, class: 'form-control', :placeholder => 'Email', :size => '50'
+            .form-group
+              %label Password
+              = f.password_field :password, class: 'form-control', autocomplete: 'off', :placeholder => 'Password', :size => '50'
+            .error
+            %div
+              %div
+                = f.submit 'Submit', class:'btn btn-primary', :value => 'Login'
+    .col-lg-3.col-md-3.col-sm-5
+  %div{:style => "clear:both"}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mini Mall</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="navbar site-header" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">LS</a>
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li class="dropdown-header">Nav header</li>
+            <li><a href="#">Separated link</a></li>
+            <li><a href="#">One more separated link</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <br/><br/>
+      <% if user_signed_in? %>
+        Logged in as <%= current_user.email %>
+        <%= link_to 'Log Out', destroy_user_session_path, method: :delete %>
+      <% else %>
+        <%= link_to 'Log In', new_user_session_path %>
+      <% end %>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-lg-12">
+
+      <p class="notice"><%= notice %></p>
+      <p class="alert"><%= alert %></p>
+
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-sm-3">
+      <!--<h4>Category</h4>
+      <ul class="list-unstyled">
+        <li> <a href="#">Computer</a> </li>
+        <li> <a href="#">Game Disk</a> </li>
+        <li> <a href="#">Game Controls</a> </li>
+        <li> <a href="#">Accessories</a> </li>
+      </ul>-->
+
+      <!--<div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Panel title</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>-->
+
+      <ul class="list-group">
+        <li class="list-group-item"><b>Category</b></li>
+
+        <li class="list-group-item"><a href="#">Computer</a></li>
+        <li class="list-group-item"><a href="#">Game Disk</a> </li>
+        <li class="list-group-item"><a href="#">Game Controls</a></li>
+        <li class="list-group-item"><a href="#">Accessories</a></li>
+        <li class="list-group-item"><a href="#">Computer</a></li>
+        <li class="list-group-item"><a href="#">Game Disk</a> </li>
+        <li class="list-group-item"><a href="#">Game Controls</a></li>
+        <li class="list-group-item"><a href="#">Accessories</a></li>
+      </ul>
+    </div>
+    <div class="col-sm-9">
+
+      <%= yield %>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <button type="button" class="btn btn-default btn-xs">contact: contact@toorel.com</button>
+        <button type="button" class="btn btn-default btn-xs">facebook: <a href="https://www.facebook.com/it.toorel">https://www.facebook.com/it.toorel</a></button>
+      </div>
+      <div class="col-lg-12">
+        <p class="footer-text text-center">
+          Always feel free to contact with us. Like us on facebook to get in touch with us.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+</body>
+</html>
