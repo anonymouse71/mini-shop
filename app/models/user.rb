@@ -9,9 +9,9 @@ class User < ActiveRecord::Base
   has_many :orders
 
   ####<$ Validation $>####
-  validates_presence_of :first_name, :last_name, :email, :encrypted_password
+  # validates_presence_of :first_name, :last_name, :email, :encrypted_password
   #validates_presence_of :email, :encrypted_password
-  after_create :add_role_for_user
+  # after_create :add_role_for_user
 
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
