@@ -67,3 +67,4 @@ gem 'omniauth-facebook', '~> 2.0.0'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'tagsinput-rails'
