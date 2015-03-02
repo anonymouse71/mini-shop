@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150124070134) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+ActiveRecord::Schema.define(version: 20150223172451) do
 
   create_table "active_admin_comments", force: true do |t|
     t.string   "namespace"
@@ -50,7 +47,7 @@ ActiveRecord::Schema.define(version: 20150124070134) do
   end
 
   create_table "carts", force: true do |t|
-    t.float    "shipping_cost"
+    t.float    "shipping_cost", limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -108,7 +105,7 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.integer  "cart_id"
     t.integer  "product_id"
     t.integer  "quantity"
-    t.float    "product_price"
+    t.float    "product_price", limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -117,7 +114,7 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.integer  "product_id"
     t.integer  "order_id"
     t.integer  "quantity"
-    t.float    "product_price"
+    t.float    "product_price", limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -127,11 +124,11 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.integer  "cart_id"
     t.string   "order_status"
     t.datetime "order_date"
-    t.float    "order_total"
+    t.float    "order_total",         limit: 24
     t.string   "shipping_address"
     t.string   "message_by_customer"
     t.string   "comment_by_admin"
-    t.float    "shipping_cost"
+    t.float    "shipping_cost",       limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -151,7 +148,7 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.string   "payment_type"
     t.string   "status"
     t.string   "transaction_number"
-    t.float    "amount"
+    t.float    "amount",                    limit: 24
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "cart_id"
@@ -170,7 +167,7 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.integer  "sub_category_id"
     t.text     "description"
     t.text     "short_description"
-    t.float    "price"
+    t.float    "price",             limit: 24
     t.integer  "stock"
     t.boolean  "is_published"
     t.integer  "main_image_id"
@@ -179,6 +176,14 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.datetime "updated_at"
     t.boolean  "is_deleted"
     t.string   "product_code"
+  end
+
+  create_table "property_sets", force: true do |t|
+    t.string   "name"
+    t.text     "properties"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", force: true do |t|
@@ -221,7 +226,11 @@ ActiveRecord::Schema.define(version: 20150124070134) do
   end
 
   create_table "users", force: true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
     t.string   "email",                    default: "", null: false
+    t.string   "mobile"
+    t.date     "date_of_birth"
     t.string   "encrypted_password",       default: "", null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -238,10 +247,6 @@ ActiveRecord::Schema.define(version: 20150124070134) do
     t.string   "uid"
     t.string   "profile_picture"
     t.string   "profile_picture_provider"
-    t.string   "last_name"
-    t.string   "first_name"
-    t.date     "date_of_birth"
-    t.string   "mobile"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

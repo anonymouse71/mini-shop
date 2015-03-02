@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   ####<$ Model Association $>####
   has_one :customer
   has_many :orders
+  has_and_belongs_to_many :roles
 
   ####<$ Validation $>####
   # validates_presence_of :first_name, :last_name, :email, :encrypted_password
@@ -44,6 +45,10 @@ class User < ActiveRecord::Base
 
     user.save(validate: true)
     user
+  end
+
+  def role?(role)
+    !!self.roles.find_by_name(role.to_s.camelize)
   end
 
   private

@@ -15,11 +15,13 @@
             %span.size
               -#12 x 1.5 L
             .price
-              %span ${{ item.price }}
+              %span
+                {{ item.price }} tk
         %td.miniCartQuantity{:style => "width:10%"}
           %a X {{ item.quantity }}
         %td.miniCartSubtotal{:style => "width:15%"}
-          %span ${{ item.price * item.quantity }}
+          %span
+            {{ item.price * item.quantity }} tk
         %td.delete{:style => "width:5%;cursor:pointer;"}
           %a{ 'ng-click' => 'removeItem(item.id)' } x
 

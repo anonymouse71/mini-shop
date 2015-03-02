@@ -24,7 +24,7 @@
             = truncate(product_description, length: 50, separator: '..') if product.short_description.present?
             -#%span.size XL / XXL / S
           .price
-            %span= product.price if product.price.present?
+            %span= to_bdt(product.price) if product.price.present?
           .action-control
             %a.btn.btn-primary{'ng-click' => "addToCart(#{product.id})"}
               %span.add2cart

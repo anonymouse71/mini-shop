@@ -49,6 +49,7 @@ Rails.application.routes.draw do
   get 'payment_info' => 'orders#payment_info', :as => :payment_info
   get 'review_order' => 'orders#review_order', :as => :review_order
   get 'confirm_order' => 'orders#confirm_order'
+  get 'remove_item_from_cart/:id' => 'line_items#remove_item_from_cart'
   post 'save_shipping_address' => 'orders#save_shipping_address', as: :save_shipping_address, via: [:post]
 
   # The priority is based upon order of creation: first created -> highest priority.

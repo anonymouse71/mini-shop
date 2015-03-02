@@ -35,7 +35,7 @@
                             -#%span.size 12 x 1.5 L
                             %td.delete
                               .price
-                                = cart.product.price
+                                = to_bdt(cart.product.price) if cart.product.price.present?
                             %td.hidden-xs
                               = cart.quantity
                             %td.hidden-xs 0
@@ -48,7 +48,7 @@
                       %tr
                         %td Total products
                         %td.price
-                          {{ grandTotal() | currency }}
+                          {{ grandTotal() }} tk
                       %tr{:style => ''}
                         %td Shipping
                         %td.price
@@ -62,7 +62,7 @@
                       %tr
                         %td Total
                         %td#total-price.price
-                          {{ grandTotal() | currency }}
+                          {{ grandTotal() }} tk
                       %tbody
 
           .cartFooter.w100

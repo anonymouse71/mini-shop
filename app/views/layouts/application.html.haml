@@ -509,13 +509,13 @@
             .dropdown.cartMenu
               %a.dropdown-toggle{'data-toggle' => 'dropdown', :href => 'index4.html#'}
                 %i.fa.fa-shopping-cart
-                %span.cartRespons Cart ({{ grandTotal() | currency }})
+                %span.cartRespons Cart ({{ grandTotal() }}) tk
                 %b.caret
               .dropdown-menu.col-lg-4.col-xs-12.col-md-4
                 = render partial: 'pages/mini_cart_in_header'
                 / /.miniCartTable
                 .miniCartFooter.text-right
-                  %h3.text-right.subtotal Subtotal: {{ grandTotal() | currency }}
+                  %h3.text-right.subtotal Subtotal: {{ grandTotal()}} tk
                   %a.btn.btn-sm.btn-danger{:href => '/cart'}
                     %i.fa.fa-shopping-cart
                     VIEW CART
