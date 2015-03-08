@@ -1,0 +1,47 @@
+.w100.clearfix.category-top
+  %h2 MEN COLLECTION
+  .w100.productFilter.clearfix
+    %p.pull-left
+      Showing
+      %strong= products.count if products.present?
+      products
+    .pull-right
+      .change-order.pull-right
+        %select.form-control{:name => "orderby"}
+          %option{:selected => "selected"} Default sorting
+          %option{:value => "popularity"} Sort by popularity
+          %option{:value => "rating"} Sort by average rating
+          %option{:value => "date"} Sort by newness
+          %option{:value => "price"} Sort by price: low to high
+          %option{:value => "price-desc"} Sort by price: high to low
+      .change-view.pull-right
+        %a.grid-view{:href => "category.html#", :title => "Grid"}
+          %i.fa.fa-th-large
+        %a.list-view{:href => "category.html#", :title => "List"}
+          %i.fa.fa-th-list
+  / /.productFilter
+  .row.categoryProduct.xsResponse.clearfix
+    - products.each do |product|
+      .item.col-sm-4.col-lg-4.col-md-4.col-xs-6
+        .product
+          -#%a.add-fav.tooltipHere{'data-original-title' => 'Add to Wishlist', 'data-placement' => 'left', 'data-toggle' => 'tooltip'}
+          -#  %i.glyphicon.glyphicon-heart
+          .image
+            = link_to product_path(product.id) do
+              = image_tag product.product_photos.first.image_url(:list).to_s, :class => 'img-responsive' if product.product_photos.present?
+          -#.promotion
+          -#  %span.new-product NEW
+          -#  %span.discount 15% OFF
+          .description
+            %h4
+              -#%a{:href => "product-details.html"} consectetuer adipiscing
+              = link_to product.name, product_path(product.id)
+            %p= truncate(product.short_description, length: 50, separator: '..') if product.short_description.present?
+          -#%span.size XL / XXL / S
+          .price
+            %span= product.price if product.price.present?
+          .action-control
+            %a.btn.btn-primary{'ng-click' => "addToCart(#{product.id})"}
+              %span.add2cart
+                %i.glyphicon.glyphicon-shopping-cart
+                Add to cart

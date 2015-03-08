@@ -8,4 +8,9 @@ class ProductsController < ApplicationController
   def category
     @products = Product.published_products
   end
+
+  def filter_products
+    @products = Product.published_products.where("sub_category_id IN (?)", params[:subcat_ids])
+  end
+
 end

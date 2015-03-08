@@ -1,0 +1,1 @@
+$('.filtered_products').html('<%= escape_javascript(render partial: 'shared/show_products', :locals => {:products => @products}).html_safe %>');

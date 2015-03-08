@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   get 'review_order' => 'orders#review_order', :as => :review_order
   get 'confirm_order' => 'orders#confirm_order'
   post 'save_shipping_address' => 'orders#save_shipping_address', as: :save_shipping_address, via: [:post]
+  get 'filter_products' => 'products#filter_products'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
