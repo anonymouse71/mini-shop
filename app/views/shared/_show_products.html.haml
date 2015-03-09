@@ -21,27 +21,31 @@
           %i.fa.fa-th-list
   / /.productFilter
   .row.categoryProduct.xsResponse.clearfix
-    - products.each do |product|
+    - if products.count > 0
+      - products.each do |product|
+        .item.col-sm-4.col-lg-4.col-md-4.col-xs-6
+          .product
+            -#%a.add-fav.tooltipHere{'data-original-title' => 'Add to Wishlist', 'data-placement' => 'left', 'data-toggle' => 'tooltip'}
+            -#  %i.glyphicon.glyphicon-heart
+            .image
+              = link_to product_path(product.id) do
+                = image_tag product.product_photos.first.image_url(:list).to_s, :class => 'img-responsive' if product.product_photos.present?
+            -#.promotion
+            -#  %span.new-product NEW
+            -#  %span.discount 15% OFF
+            .description
+              %h4
+                -#%a{:href => "product-details.html"} consectetuer adipiscing
+                = link_to product.name, product_path(product.id)
+              %p= truncate(product.short_description, length: 50, separator: '..') if product.short_description.present?
+            -#%span.size XL / XXL / S
+            .price
+              %span= product.price if product.price.present?
+            .action-control
+              %a.btn.btn-primary{'ng-click' => "addToCart(#{product.id})"}
+                %span.add2cart
+                  %i.glyphicon.glyphicon-shopping-cart
+                  Add to cart
+    - else
       .item.col-sm-4.col-lg-4.col-md-4.col-xs-6
-        .product
-          -#%a.add-fav.tooltipHere{'data-original-title' => 'Add to Wishlist', 'data-placement' => 'left', 'data-toggle' => 'tooltip'}
-          -#  %i.glyphicon.glyphicon-heart
-          .image
-            = link_to product_path(product.id) do
-              = image_tag product.product_photos.first.image_url(:list).to_s, :class => 'img-responsive' if product.product_photos.present?
-          -#.promotion
-          -#  %span.new-product NEW
-          -#  %span.discount 15% OFF
-          .description
-            %h4
-              -#%a{:href => "product-details.html"} consectetuer adipiscing
-              = link_to product.name, product_path(product.id)
-            %p= truncate(product.short_description, length: 50, separator: '..') if product.short_description.present?
-          -#%span.size XL / XXL / S
-          .price
-            %span= product.price if product.price.present?
-          .action-control
-            %a.btn.btn-primary{'ng-click' => "addToCart(#{product.id})"}
-              %span.add2cart
-                %i.glyphicon.glyphicon-shopping-cart
-                Add to cart
+        .alert.alert-danger{:role => "alert"} No products found!

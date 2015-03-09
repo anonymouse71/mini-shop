@@ -15,4 +15,12 @@ module ProductsHelper
   def subcat_to_category(subCat)
     Category.find((SubCategory.find_by_name(subCat)).category_id)
   end
+
+  def highest_price
+    Product.order(price: :desc).first.price
+  end
+
+  def lowest_price
+    Product.order(price: :desc).last.price
+  end
 end
