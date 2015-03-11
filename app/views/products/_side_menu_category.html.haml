@@ -41,13 +41,13 @@
         %span.pull-right.clearFilter.label-danger Clear
     #collapsePrice.panel-collapse.collapse.in
       .panel-body.priceFilterBody
-        /
-        %label
-          %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
-          #{low_price}$ - #{temp_price}$
-          - low_price = temp_price
-          - temp_price += price_difference
-        %br
+        .priceFilterRadio
+          %label
+            %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
+            #{low_price}$ - #{temp_price}$
+            - low_price = temp_price
+            - temp_price += price_difference
+          %br
           %label
             %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
             #{low_price}$ - #{temp_price}$
@@ -67,21 +67,21 @@
                 - temp_price += price_difference
               %br
                 %label
-                  %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
+                  %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{high_price}", "data-min" => "#{low_price}"}/
                   #{low_price}$ - #{high_price}$
                 %br
                   %label
                     %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{highest_price.to_i}", "data-min" => "#{lowest_price.to_i}", :checked => true}/
                     Don't know
-                  %hr
-                    %p Enter a Price range
-                    %form.form-inline{:role => "form"}
-                      .form-group
-                        %input#exampleInputEmail2.form-control{:placeholder => "2000 $", :type => "text", :name => "max_price"}
-                      .form-group.sp -
-                      .form-group
-                        %input#exampleInputPassword2.form-control{:placeholder => "3000 $", :type => "text", :name => "min_price"}
-                      %button.btn.btn-default.pull-right{:type => "submit"} check
+        %hr
+          %p Enter a Price range
+          %form.form-inline{:role => "form"}
+            .form-group
+              %input#exampleInputEmail2.form-control{:placeholder => "2000 $", :type => "text", :name => "min_price"}
+            .form-group.sp -
+            .form-group
+              %input#exampleInputPassword2.form-control{:placeholder => "3000 $", :type => "text", :name => "max_price"}
+            %button.btn.btn-default.pull-right{onclick: "filterByPrice()"} check
   / /price panel end
   -#.panel.panel-default
   -#  .panel-heading
@@ -285,14 +285,20 @@
 
 :javascript
   $('input.subcat_checkbox').click(function () {
-    var sFilter = [];
+    var sFilter = [], max_price, min_price;
     $('input.subcat_checkbox[type=checkbox]').each(function () {
         if (this.checked){
           sFilter.push($(this).val());
         }
     });
-    var max_price = $('input[name=pricefilter]:checked').data('max');
-    var min_price = $('input[name=pricefilter]:checked').data('min');
+    if ($('input[name=pricefilter]:checked').length > 0){
+      max_price = $('input[name=pricefilter]:checked').data('max');
+      min_price = $('input[name=pricefilter]:checked').data('min');
+    }
+    else{
+      max_price = $('input[name=max_price]').val();
+      min_price = $('input[name=min_price]').val();
+    }
     $.ajax({
       url: "/filter_products",
       data: {subcat_ids: sFilter, max_price: max_price, min_price: min_price},
@@ -300,21 +306,42 @@
     })
   });
 
-  $('.priceFilterBody input').on('change', function() {
+  $('.priceFilterRadio input').on('change', function() {
+    if ($('input[name=pricefilter]:checked').length > 0){
+      var sFilter = [];
+      $('input.subcat_checkbox[type=checkbox]').each(function () {
+          if (this.checked){
+            sFilter.push($(this).val());
+          }
+      });
+      $('#exampleInputEmail2').val('');
+      $('#exampleInputPassword2').val('');
+      var max_price = $('input[name=pricefilter]:checked').data('max');
+      var min_price = $('input[name=pricefilter]:checked').data('min');
+      $.ajax({
+        url: "/filter_products",
+        data: {subcat_ids: sFilter, max_price: max_price, min_price: min_price},
+        method: "get"
+      })
+    }
+  });
+
+  function filterByPrice() {
+    $('input[name=pricefilter]').prop( "checked", false );
     var sFilter = [];
     $('input.subcat_checkbox[type=checkbox]').each(function () {
         if (this.checked){
           sFilter.push($(this).val());
         }
     });
-    var max_price = $('input[name=pricefilter]:checked').data('max');
-    var min_price = $('input[name=pricefilter]:checked').data('min');
+    var max_price = $('input[name=max_price]').val();
+    var min_price = $('input[name=min_price]').val();
     $.ajax({
       url: "/filter_products",
       data: {subcat_ids: sFilter, max_price: max_price, min_price: min_price},
       method: "get"
     })
-  });
+  }
 
 :css
   .icr{
