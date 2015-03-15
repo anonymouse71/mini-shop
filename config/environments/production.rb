@@ -79,4 +79,10 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.default_url_options = { host: '54.69.40.210', port: 80 }
+
+  # facebook sign in
+  FACEBOOK_SIGN_IN_APP_ID = '350450435138697'
+  FACEBOOK_SIGN_IN_APP_SECRET = '7f86bce615881cd6cebb3502a3e900d9'
 end
