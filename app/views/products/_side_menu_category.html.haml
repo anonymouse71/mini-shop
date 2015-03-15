@@ -10,302 +10,346 @@
     #collapseCategory.panel-collapse.collapse.in
       .panel-body
         %ul.nav.nav-pills.nav-stacked.tree
-          %li.active.dropdown-tree.open-tree
-            %a.dropdown-tree-a
-              %span.badge.pull-right 42
-              WOMEN COLLECTION
-            %ul.category-level-2.dropdown-menu-tree
-              %li.dropdown-tree
-                %a.dropdown-tree-a{:href => "sub-category.html"} Tshirt
-              %li
-                %a Shoes
-              %li
-                %a Shirt
-              %li
-                %a T shirt
-              %li
-                %a{:href => "sub-category.html"} Shirt
-              %li
-                %a{:href => "sub-category.html"} Fragrances
-              %li
-                %a{:href => "sub-category.html"} Scarf
-              %li
-                %a{:href => "sub-category.html"} Sandal
-              %li
-                %a{:href => "sub-category.html"} Underwear
-              %li
-                %a{:href => "sub-category.html"} Winter Collection
-              %li
-                %a{:href => "sub-category.html"} Men Accessories
-          %li
-            %a{:href => "category.html#"}
-              %span.badge.pull-right 42
-              MEN COLLECTION
-          %li
-            %a{:href => "category.html#"}
-              %span.badge.pull-right 42
-              Baby & Kids
-          %li
-            %a{:href => "category.html#"}
-              %span.badge.pull-right 42
-              Home & Kitchen
-          %li
-            %a{:href => "category.html#"}
-              %span.badge.pull-right 42
-              Baby & Kids
-          %li
-            %a{:href => "category.html#"}
-              %span.badge.pull-right 42
-              More Stores
-          %li
-            %a{:href => "category.html#"}
-              %span.badge.pull-right 42
-              Offers Zone
+          - Category.all.each do |category|
+            - if find_products_of_any_category(category).size > 0
+              %li{:class => "dropdown-tree open-tree"}
+                %a.dropdown-tree-a
+                  %span.badge.pull-right
+                    = find_products_of_any_category(category).size
+                  = category.name.upcase
+                %ul.category-level-2.dropdown-menu-tree
+                  - category.sub_categories.each do |subCat|
+                    %li{:class => "dropdown-tree"}
+                      .checkbox
+                        %label
+                          %input{ :type => "checkbox", :value => "#{subCat.id}", :class=> "subcat_checkbox"}
+                            = subCat.name
+
+
   / /Category menu end
   .panel.panel-default
     .panel-heading
       %h4.panel-title
         %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapsePrice"}
           Price
+          - price_difference = ((highest_price - lowest_price)/5).to_i
+          - low_price = lowest_price.to_i
+          - high_price = highest_price.to_i
+          - temp_price = (low_price + price_difference).to_i
           %span.pull-left
             %i.fa.fa-caret-right
         %span.pull-right.clearFilter.label-danger Clear
     #collapsePrice.panel-collapse.collapse.in
       .panel-body.priceFilterBody
-        /
-        %label
-          %input{:name => "agree", :type => "radio", :value => "0"}/
-          100$ - 500$
-        %br
+        .priceFilterRadio
           %label
-            %input{:name => "agree", :type => "radio", :value => "1"}/
-            500$ - 1000$
+            %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
+            #{low_price}$ - #{temp_price}$
+            - low_price = temp_price
+            - temp_price += price_difference
+          %br
+          %label
+            %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
+            #{low_price}$ - #{temp_price}$
+          - low_price = temp_price
+          - temp_price += price_difference
           %br
             %label
-              %input{:name => "agree", :type => "radio", :value => "2"}/
-              1000$ - 1500$
+              %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
+              #{low_price}$ - #{temp_price}$
+              - low_price = temp_price
+              - temp_price += price_difference
             %br
               %label
-                %input{:name => "agree", :type => "radio", :value => "3"}/
-                1500$ - 2000$
+                %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{temp_price}", "data-min" => "#{low_price}"}/
+                #{low_price}$ - #{temp_price}$
+                - low_price = temp_price
+                - temp_price += price_difference
               %br
                 %label
-                  %input{:name => "agree", :type => "radio", :value => "4"}/
-                  2000$ - 2500$
+                  %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{high_price}", "data-min" => "#{low_price}"}/
+                  #{low_price}$ - #{high_price}$
                 %br
                   %label
-                    %input{:name => "agree", :type => "radio", :value => "5"}/
-                    2500$ - 3000$
-                  %br
-                    %label
-                      %input{:checked => "", :disabled => "", :name => "agree", :type => "radio", :value => "6"}/
-                      Don't know
-                    %hr
-                      %p Enter a Price range
-                      %form.form-inline{:role => "form"}
-                        .form-group
-                          %input#exampleInputEmail2.form-control{:placeholder => "2000 $", :type => "text"}
-                        .form-group.sp -
-                        .form-group
-                          %input#exampleInputPassword2.form-control{:placeholder => "3000 $", :type => "text"}
-                        %button.btn.btn-default.pull-right{:type => "submit"} check
+                    %input{:name => "pricefilter", :type => "radio", :value => "0", "data-max" => "#{highest_price.to_i}", "data-min" => "#{lowest_price.to_i}", :checked => true}/
+                    Don't know
+        %hr
+          %p Enter a Price range
+          %form.form-inline{:role => "form"}
+            .form-group
+              %input#exampleInputEmail2.form-control{:placeholder => "2000 $", :type => "text", :name => "min_price"}
+            .form-group.sp -
+            .form-group
+              %input#exampleInputPassword2.form-control{:placeholder => "3000 $", :type => "text", :name => "max_price"}
+            %button.btn.btn-default.pull-right{onclick: "filterByPrice()"} check
   / /price panel end
-  .panel.panel-default
-    .panel-heading
-      %h4.panel-title
-        %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapseBrand"}
-          Brand
-          %span.pull-left
-            %i.fa.fa-caret-right
-    #collapseBrand.panel-collapse.collapse.in
-      .panel-body.smoothscroll.maxheight300
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "0"}/
-            Armani
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "1"}/
-            Gucci
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "2"}/
-            Louis Vuitton
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Chanel
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Roberto Cavalli
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Valentino
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Ralph Lauren
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Miu Miu
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            McQueen
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            adidas
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Nike
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Jimmy Choo
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Bottega Veneta
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Donna Karan
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Oscar de la Renta
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Tods
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Burberry
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Michael Kors
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Mulberry
-        .block-element
-          %label &nbsp;
+  -#.panel.panel-default
+  -#  .panel-heading
+  -#    %h4.panel-title
+  -#      %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapseBrand"}
+  -#        Brand
+  -#        %span.pull-left
+  -#          %i.fa.fa-caret-right
+  -#  #collapseBrand.panel-collapse.collapse.in
+  -#    .panel-body.smoothscroll.maxheight300
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "0"}/
+  -#          Armani
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "1"}/
+  -#          Gucci
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "2"}/
+  -#          Louis Vuitton
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Chanel
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Roberto Cavalli
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Valentino
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Ralph Lauren
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Miu Miu
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          McQueen
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          adidas
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Nike
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Jimmy Choo
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Bottega Veneta
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Donna Karan
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Oscar de la Renta
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Tods
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Burberry
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Michael Kors
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Mulberry
+  -#      .block-element
+  -#        %label &nbsp;
 
   / /brand panel end
-  .panel.panel-default
-    .panel-heading
-      %h4.panel-title
-        %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapseColor"}
-          Color
-          %span.pull-left
-            %i.fa.fa-caret-right
-    #collapseColor.panel-collapse.collapse.in
-      .panel-body.smoothscroll.maxheight300.color-filter
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "0"}/
-            %small{:style => "background-color:#333333"}
-            Black
-            %span (123)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "1"}/
-            %small{:style => "background-color:#1664c4"}
-            Blue (434)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "2"}/
-            %small{:style => "background-color:#c00707"}
-            Red (338)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#6fcc14"}
-            Green (253)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#943f00"}
-            Brown (240)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#ff1cae"}
-            Pink (212)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#f5f5dc"}
-            Beige (176)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#adadad"}
-            Grey (154)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#5d00dc"}
-            Purple (132)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#f1f40e"}
-            Yellow (104)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#ffc600"}
-            Orange (77)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#9b1d00"}
-            Maroon (76)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#0a43a3"}
-            Navy Blue (68)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#ede4b2"}
-            Tan (67)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#ecf1ef"}
-            Silver (49)
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            %small{:style => "background-color:#f3f1e7"}
-            Off White (44)
-        .block-element
-          %label &nbsp;
+  -#.panel.panel-default
+  -#  .panel-heading
+  -#    %h4.panel-title
+  -#      %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapseColor"}
+  -#        Color
+  -#        %span.pull-left
+  -#          %i.fa.fa-caret-right
+  -#  #collapseColor.panel-collapse.collapse.in
+  -#    .panel-body.smoothscroll.maxheight300.color-filter
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "0"}/
+  -#          %small{:style => "background-color:#333333"}
+  -#          Black
+  -#          %span (123)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "1"}/
+  -#          %small{:style => "background-color:#1664c4"}
+  -#          Blue (434)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "2"}/
+  -#          %small{:style => "background-color:#c00707"}
+  -#          Red (338)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#6fcc14"}
+  -#          Green (253)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#943f00"}
+  -#          Brown (240)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#ff1cae"}
+  -#          Pink (212)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#f5f5dc"}
+  -#          Beige (176)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#adadad"}
+  -#          Grey (154)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#5d00dc"}
+  -#          Purple (132)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#f1f40e"}
+  -#          Yellow (104)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#ffc600"}
+  -#          Orange (77)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#9b1d00"}
+  -#          Maroon (76)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#0a43a3"}
+  -#          Navy Blue (68)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#ede4b2"}
+  -#          Tan (67)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#ecf1ef"}
+  -#          Silver (49)
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          %small{:style => "background-color:#f3f1e7"}
+  -#          Off White (44)
+  -#      .block-element
+  -#        %label &nbsp;
   / /color panel end
-  .panel.panel-default
-    .panel-heading
-      %h4.panel-title
-        %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapseThree"}
-          Discount
-          %span.pull-left
-            %i.fa.fa-caret-right
-    #collapseThree.panel-collapse.collapse.in
-      .panel-body
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Non-Discounted items
-        .block-element
-          %label
-            %input{:name => "tour", :type => "checkbox", :value => "3"}/
-            Discounted items
+  -#.panel.panel-default
+  -#  .panel-heading
+  -#    %h4.panel-title
+  -#      %a.collapseWill{"data-toggle" => "collapse", :href => "category.html#collapseThree"}
+  -#        Discount
+  -#        %span.pull-left
+  -#          %i.fa.fa-caret-right
+  -#  #collapseThree.panel-collapse.collapse.in
+  -#    .panel-body
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Non-Discounted items
+  -#      .block-element
+  -#        %label
+  -#          %input{:name => "tour", :type => "checkbox", :value => "3"}/
+  -#          Discounted items
+
+:javascript
+  $('input.subcat_checkbox').click(function () {
+    var sFilter = [], max_price, min_price;
+    $('input.subcat_checkbox[type=checkbox]').each(function () {
+        if (this.checked){
+          sFilter.push($(this).val());
+        }
+    });
+    if ($('input[name=pricefilter]:checked').length > 0){
+      max_price = $('input[name=pricefilter]:checked').data('max');
+      min_price = $('input[name=pricefilter]:checked').data('min');
+    }
+    else{
+      max_price = $('input[name=max_price]').val();
+      min_price = $('input[name=min_price]').val();
+    }
+    $.ajax({
+      url: "/filter_products",
+      data: {subcat_ids: sFilter, max_price: max_price, min_price: min_price},
+      method: "get"
+    })
+  });
+
+  $('.priceFilterRadio input').on('change', function() {
+    if ($('input[name=pricefilter]:checked').length > 0){
+      var sFilter = [];
+      $('input.subcat_checkbox[type=checkbox]').each(function () {
+          if (this.checked){
+            sFilter.push($(this).val());
+          }
+      });
+      $('#exampleInputEmail2').val('');
+      $('#exampleInputPassword2').val('');
+      var max_price = $('input[name=pricefilter]:checked').data('max');
+      var min_price = $('input[name=pricefilter]:checked').data('min');
+      $.ajax({
+        url: "/filter_products",
+        data: {subcat_ids: sFilter, max_price: max_price, min_price: min_price},
+        method: "get"
+      })
+    }
+  });
+
+  function filterByPrice() {
+    $('input[name=pricefilter]').prop( "checked", false );
+    var sFilter = [];
+    $('input.subcat_checkbox[type=checkbox]').each(function () {
+        if (this.checked){
+          sFilter.push($(this).val());
+        }
+    });
+    var max_price = $('input[name=max_price]').val();
+    var min_price = $('input[name=min_price]').val();
+    $.ajax({
+      url: "/filter_products",
+      data: {subcat_ids: sFilter, max_price: max_price, min_price: min_price},
+      method: "get"
+    })
+  }
+
+:css
+  .icr{
+  display: none;
+  }
+  .checkbox label,input{
+    display: block !important;
+  }
+  .priceFilterBody label,input{
+    display: inline-block !important;
+  }

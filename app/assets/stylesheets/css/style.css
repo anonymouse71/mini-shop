@@ -2924,7 +2924,7 @@ h5.parallaxSubtitle {
 	color: #fff;
 }
 .category-level-2 {
-	border-left: 1px solid #DDDDDD !important;
+	/*border-left: 1px solid #DDDDDD !important;*/
 	margin-left: 13px;
 }
 .category-level-2 li {
