@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
   resources :billing_details
-
-  mount Ckeditor::Engine => '/ckeditor'
   resources :orders
   resources :line_items
   resources :carts
