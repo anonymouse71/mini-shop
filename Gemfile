@@ -49,7 +49,7 @@ gem 'carrierwave', '~> 0.10.0'
 gem 'rmagick', '~> 2.13.3'
 
 # CKEditor
-gem 'ckeditor', '~> 4.1.0'
+#gem 'ckeditor', '~> 4.1.0'
 gem 'haml', '~> 4.0.5'
 
 # Facebook
