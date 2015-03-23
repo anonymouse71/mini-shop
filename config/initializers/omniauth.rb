@@ -3,7 +3,7 @@ if Rails.env.production?
 elsif Rails.env.staging?
   OmniAuth.config.full_host = 'http://udk.test.nascenia.com:81'
 else
-  OmniAuth.config.full_host = 'http://localhost:3000'
+  OmniAuth.config.full_host = 'http://aborony.com'
 end
 
 # Rails.application.config.middleware.use OmniAuth::Builder do
