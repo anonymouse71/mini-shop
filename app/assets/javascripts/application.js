@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-// require turbolinks
 //= require js/bootstrap.min
 //= require js/idangerous.swiper-2.1.min
 //= require js/jquery.cycle2.min
